@@ -73,8 +73,8 @@
 <div class="aimhint" id="hint">PRZESUŃ PALCEM W LEWO LUB PRAWO, BY WYBRAĆ KIERUNEK</div>
 <div class="flash" id="flash"><span id="flashText">OBRONA!</span></div>
 </div></section>
-<div class="meterWrap"><div class="meterTitle"><span>MOC STRZAŁU</span><span id="powerLabel">USTAW MOMENT!</span></div><div class="meter" id="meter"><div class="meterGreen"></div><div class="meterYellow"></div><div class="meterRed"></div><div class="meterNeedle" id="needle"></div></div><div class="meterScale"><span>LEKKO</span><span>IDEALNIE</span><span>ZA MOCNO!</span></div></div><div class="under"><button class="btn primary" id="shoot">⚽ STRZAŁ!</button><button class="btn secondary" id="reset">↻ OD NOWA</button></div>
-<p class="tip">💡 Jesteś strzelającym! Przesuń palcem w lewo lub prawo po murawie, wybierz kierunek i stuknij STRZAŁ w dobrym momencie. Czerwone pole = za mocno, piłka poleci poza bramkę.</p>
+<div class="under"><button class="btn primary" id="shoot">⚽ STRZAŁ!</button><button class="btn secondary" id="reset">↻ OD NOWA</button></div>
+<p class="tip">💡 Strzałka lata jak w FIFA 17. Przytrzymaj STRZAŁ, żeby nabrać mocy, i puść, aby kopnąć. Im dłużej trzymasz, tym mocniejszy strzał!</p>
 <section class="section">
 <div class="sectionhead"><strong>💬 SZATNIA I PODRYW</strong><small>TEKSTY KAPITANA</small></div>
 <div class="dialogue"><div class="avatar" id="chatAvatar">😎</div><div class="bubble" id="chatText"><b>Kapitan Koks:</b> Spokojnie, ten karny jest łatwiejszy niż zagadanie do kogoś na trybunach.</div></div>
@@ -86,7 +86,7 @@
 <script>
 (()=>{
 const $=id=>document.getElementById(id);
-let goals=0,round=1,fans=0,busy=false,finished=false,shotTimer=null,power=0,powerDir=1,arrowPos=50,arrowDir=1,aimSide='center',arrowRunning=true;
+let goals=0,round=1,fans=0,busy=false,finished=false,shotTimer=null,power=0,chargeStart=0,charging=false,arrowPos=50,arrowDir=1,aimSide='center',arrowRunning=true;
 const keeper=$('keeper'),ball=$('ball'),pitch=$('pitch'),arrow=$('aimArrow');
 const jokes=[
 ['😎','<b>Kapitan Koks:</b> Czy wierzysz w gola od pierwszego strzału, czy mam spróbować jeszcze raz?'],
@@ -105,33 +105,48 @@ function update(){ $('saves').textContent=goals;$('round').textContent=finished?
 function resetPos(){keeper.className='keeper';keeper.style.left='50%';keeper.style.top='12px';ball.className='ball';ball.style.left='50%';ball.style.top='284px';arrowPos=50;arrowDir=1;arrowRunning=true;aimSide='center';arrow.classList.remove('locked');arrow.style.left='50%';arrow.style.top='205px';arrow.style.transform='translateX(-50%) rotate(0deg)';$('hint').textContent='STRZAŁKA LATA W LEWO I PRAWO — STUKNIJ STRZAŁ!';$('shoot').disabled=false}
 function flash(text){$('flashText').textContent=text;$('flash').classList.add('show');setTimeout(()=>$('flash').classList.remove('show'),850)}
 function finish(){finished=true;update();$('modalTitle').textContent=goals>=4?'🔥 KRÓL KARNYCH!':'🏁 KONIEC SERII';$('modalText').textContent='Gole: '+goals+' z 5. '+(goals>=4?'Kibice skandują: KOKS! KOKS! Jesteś legendą stadionu.':goals>=2?'Niezły mecz, kapitanie! Jeszcze trochę treningu i będzie perfekcja.':'Każda legenda zaczyna od treningu. Rewanż?');$('modal').classList.add('open')}
-function startShot(){
+function startShot(shotPower){
 if(busy||finished)return;
-busy=true;arrowRunning=false;arrow.classList.add('locked');$('shoot').disabled=true;$('shoot').textContent='⏳ STRZAŁ W TOKU';$('hint').textContent='STRZAŁ W RUCHU! BRAMKARZ REAGUJE…';
+busy=true;charging=false;arrowRunning=false;arrow.classList.add('locked');$('shoot').disabled=true;$('shoot').textContent='⏳ STRZAŁ W TOKU';$('hint').textContent='STRZAŁ W RUCHU! BRAMKARZ REAGUJE…';
 aimSide=arrowPos<35?'left':arrowPos>65?'right':'center';
-const shotPower=power;
 const keeperDirection=['left','center','right'][Math.floor(Math.random()*3)];
 const x=aimSide==='left'?22:aimSide==='right'?78:50;
-const y=shotPower>82?'-12px':'64px';
+const y=shotPower>92?'-12px':'64px';
 ball.className='ball flying';ball.style.left=x+'%';ball.style.top=y;
 keeper.className='keeper '+(keeperDirection==='left'?'dive-left':keeperDirection==='right'?'dive-right':'');keeper.style.left=keeperDirection==='left'?'24%':keeperDirection==='right'?'76%':'50%';keeper.style.top=keeperDirection==='center'?'8px':'-2px';
-$('powerLabel').textContent=shotPower>82?'ZA MOCNO!':shotPower>42?'MOCNY STRZAŁ':'LEKKI STRZAŁ';
+
 shotTimer=setTimeout(()=>{
-if(shotPower>82){flash('POZA BRAMKĄ! 🚀');say(['😵','<b>Kapitan Koks:</b> O kurczę, poleciała na trybuny! Następnym razem kliknij, zanim wskaźnik wejdzie w czerwone.'])}
+if(shotPower>92){flash('POZA BRAMKĄ! 🚀');say(['😵','<b>Kapitan Koks:</b> O kurczę, tak mocno kopnąłeś, że poleciała na trybuny! Spróbuj puścić trochę wcześniej.'])}
 else if(keeperDirection===aimSide){
 keeper.classList.add('catch');ball.className='ball saved';ball.style.left=(keeperDirection==='left'?'29%':keeperDirection==='right'?'71%':'50%');ball.style.top='88px';flash('OBRONA! 🧤');say(['🧤','<b>Kapitan Koks:</b> ZŁAPAŁEM! Bramkarskie ręce jak magnesy!'])
 }else{goals++;fans+=Math.floor(Math.random()*5)+3;flash('GOOOOL! ⚽🔥');say(['🥳','<b>Kapitan Koks:</b> SIATKA ZATRZEPOTAŁA! Tak się robi karne, szefie!'])}
 round++;update();
 if(round>5){setTimeout(finish,850);busy=false;$('shoot').textContent='SERIA ZAKOŃCZONA';return}
-setTimeout(()=>{resetPos();busy=false;$('shoot').textContent='⚽ STRZAŁ!';$('powerLabel').textContent='USTAW MOMENT!'},850)
+setTimeout(()=>{resetPos();busy=false;$('shoot').textContent='⚽ STRZAŁ!';},850)
 },650)
 }
-$('shoot').addEventListener('click',startShot);
-$('reset').addEventListener('click',()=>{clearTimeout(shotTimer);goals=0;round=1;fans=0;busy=false;finished=false;power=0;$('modal').classList.remove('open');$('shoot').textContent='⚽ STRZAŁ!';$('shoot').disabled=false;resetPos();update();say(['😎','<b>Kapitan Koks:</b> Nowa seria! Poczekaj na odpowiedni kierunek i stuknij STRZAŁ!'])});
+function beginCharge(e){
+if(busy||finished||charging)return;
+e.preventDefault();charging=true;chargeStart=Date.now();power=12;
+$('shoot').textContent='💥 ŁADOWANIE MOCY…';$('hint').textContent='TRZYMAJ… PUŚĆ, GDY MOC BĘDZIE ODPOWIEDNIA!';
+try{$('shoot').setPointerCapture(e.pointerId)}catch(_){}
+}
+function releaseCharge(e){
+if(!charging)return;
+e.preventDefault();charging=false;
+const held=Math.max(0,Date.now()-chargeStart);
+const shotPower=Math.min(100,12+held/22);
+$('shoot').style.filter='';
+startShot(shotPower);
+}
+$('shoot').addEventListener('pointerdown',beginCharge);
+$('shoot').addEventListener('pointerup',releaseCharge);
+$('shoot').addEventListener('pointercancel',releaseCharge);
+$('reset').addEventListener('click',()=>{clearTimeout(shotTimer);goals=0;round=1;fans=0;busy=false;finished=false;power=0;charging=false;$('modal').classList.remove('open');$('shoot').textContent='⚽ PRZYTRZYMAJ, BY STRZELIĆ';$('shoot').disabled=false;resetPos();update();say(['😎','<b>Kapitan Koks:</b> Nowa seria! Poczekaj na odpowiedni kierunek i stuknij STRZAŁ!'])});
 $('playAgain').addEventListener('click',()=>{$('modal').classList.remove('open');$('reset').click()});
 $('joke').addEventListener('click',()=>say(jokes[Math.floor(Math.random()*jokes.length)]));
 $('pep').addEventListener('click',()=>say(pepTalks[Math.floor(Math.random()*pepTalks.length)]));
-setInterval(()=>{if(busy||finished)return;power+=powerDir*2.4;if(power>=100){power=100;powerDir=-1}else if(power<=0){power=0;powerDir=1}$('needle').style.left=power+'%';$('powerLabel').textContent=power>82?'🔴 ZA MOCNO!':power>42?'🟡 DOBRA MOC':'🟢 LEKKO';},35);
+setInterval(()=>{if(!charging||busy||finished)return;power=Math.min(100,12+(Date.now()-chargeStart)/22);$('shoot').style.filter='brightness('+(1+power/250)+')';},35);
 setInterval(()=>{if(busy||finished||!arrowRunning)return;arrowPos+=arrowDir*1.65;if(arrowPos>=88){arrowPos=88;arrowDir=-1}else if(arrowPos<=12){arrowPos=12;arrowDir=1}arrow.style.left=arrowPos+'%';arrow.style.transform='translateX(-50%) rotate('+(arrowDir>0?0:180)+'deg)'},25);
 update();
 })();
