@@ -3,7 +3,96 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title></title>
+<title>KRECHA Z KOKSEM — scena 3D</title>
+<style>
+:root{color-scheme:dark;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#11151b;color:#f7f4ed}
+#game{position:fixed;inset:0}canvas{display:block;width:100%;height:100%}
+.hud{position:fixed;inset:0;pointer-events:none;display:flex;flex-direction:column;justify-content:space-between;padding:clamp(14px,3vw,30px)}
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:14px}
+.brand{background:#11151bd9;border:1px solid #ffffff20;border-radius:14px;padding:12px 16px;backdrop-filter:blur(12px)}
+.brand strong{display:block;font-size:clamp(15px,2vw,22px);letter-spacing:.12em}.brand span{display:block;color:#b9c1cd;font-size:12px;margin-top:4px}
+.pill{font-size:12px;color:#c8d2df;background:#11151bd9;border:1px solid #ffffff20;border-radius:999px;padding:10px 13px}
+.bottom{display:flex;justify-content:space-between;align-items:flex-end;gap:12px}
+.hint{max-width:340px;background:#11151bd9;border:1px solid #ffffff20;border-radius:14px;padding:12px 15px;color:#c8cdd5;font-size:13px;line-height:1.5;backdrop-filter:blur(12px)}
+.controls{pointer-events:auto;display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end}
+button{border:1px solid #ffffff26;border-radius:12px;background:#f3c76a;color:#211b10;padding:13px 17px;font-weight:750;cursor:pointer;box-shadow:0 8px 25px #0004}
+button.secondary{background:#161d26;color:#f6f3ed}button:disabled{opacity:.55;cursor:wait}
+#status{color:#f3c76a;font-weight:650}
+@media(max-width:620px){.bottom{flex-direction:column;align-items:stretch}.hint{max-width:none}.controls{justify-content:stretch}.controls button{flex:1}.pill{display:none}}
+</style>
 </head>
-<body></body>
+<body>
+<div id="game"></div>
+<div class="hud">
+  <div class="top">
+    <div class="brand"><strong>KRECHA Z KOKSEM</strong><span>Scena testowa • 3D • singleplayer</span></div>
+    <div class="pill">WERSJA 0.1 · WEBGL</div>
+  </div>
+  <div class="bottom">
+    <div class="hint"><span id="status">Kokos stoi przy stole.</span><br>Animacja przedstawia zwykłą mąkę kuchenną. Kliknij „Odtwórz scenę”, aby uruchomić sekwencję.</div>
+    <div class="controls"><button id="play">▶ Odtwórz scenę</button><button id="reset" class="secondary">↺ Od nowa</button></div>
+  </div>
+</div>
+<script type="module">
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
+import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js';
+
+const host=document.querySelector('#game');
+const scene=new THREE.Scene();scene.background=new THREE.Color('#aebbc4');scene.fog=new THREE.Fog('#aebbc4',11,28);
+const camera=new THREE.PerspectiveCamera(42,innerWidth/innerHeight,.1,100);camera.position.set(5.3,4.1,7.7);
+const renderer=new THREE.WebGLRenderer({antialias:true,powerPreference:'high-performance'});renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.setSize(innerWidth,innerHeight);renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.15;host.appendChild(renderer.domElement);
+const controls=new OrbitControls(camera,renderer.domElement);controls.target.set(0,1.25,0);controls.enableDamping=true;controls.minDistance=4;controls.maxDistance=11;controls.maxPolarAngle=Math.PI*.48;
+scene.add(new THREE.HemisphereLight(0xe8f2ff,0x66503b,2.0));
+const key=new THREE.DirectionalLight(0xffe4bf,3.1);key.position.set(-4,8,5);key.castShadow=true;key.shadow.mapSize.set(2048,2048);key.shadow.camera.left=-8;key.shadow.camera.right=8;key.shadow.camera.top=8;key.shadow.camera.bottom=-8;scene.add(key);
+const fill=new THREE.DirectionalLight(0xc6dfff,1.2);fill.position.set(5,4,-4);scene.add(fill);
+const mat=(color,roughness=.75,metalness=0)=>new THREE.MeshStandardMaterial({color,roughness,metalness});
+const wood=mat('#79543a'),woodLight=mat('#a77a50'),dark=mat('#292f36'),shirt=mat('#d4a64f'),pants=mat('#394e60'),skin=mat('#c9895d'),white=mat('#eee9dd'),black=mat('#20242a'),flourMat=new THREE.MeshStandardMaterial({color:'#f2eee4',roughness:1});
+function box(parent,name,size,material,pos){const m=new THREE.Mesh(new THREE.BoxGeometry(...size),material);m.name=name;m.position.set(...pos);m.castShadow=true;m.receiveShadow=true;parent.add(m);return m}
+function sphere(parent,name,scale,material,pos){const m=new THREE.Mesh(new THREE.SphereGeometry(1,32,24),material);m.name=name;m.scale.set(...scale);m.position.set(...pos);m.castShadow=true;m.receiveShadow=true;parent.add(m);return m}
+const floor=box(scene,'floor',[200,.15,200],mat('#626a6d'),[0,-.12,0]);floor.receiveShadow=true;
+const room= new THREE.Group();scene.add(room);
+box(room,'back wall',[15,6,.18],mat('#b8c2c4'),[0,2.8,-4.7]);
+box(room,'side wall',[.18,6,10],mat('#c4cbca'),[-7.4,2.8,0]);
+for(let i=0;i<7;i++){const x=-5.8+i*1.9;box(room,'wall panel',[1.72,2.5,.035],mat(i%2?'#c0c8c8':'#b5c0c1'),[x,2.3,-4.58]);}
+const table=new THREE.Group();table.position.set(0,0,0);scene.add(table);
+box(table,'tabletop',[3.1,.18,1.55],woodLight,[0,1.18,-.15]);
+for(const x of [-1.32,1.32])for(const z of [-.72,.42])box(table,'table leg',[.13,1.12,.13],wood,[x,.55,z]);
+box(table,'table apron',[2.7,.22,.12],wood, [0,.98,.42]);
+for(let i=0;i<3;i++)box(table,'wood grain',[2.75,.012,.018],mat('#815c3d'),[0,1.279,-.6+i*.38]);
+const bowl=new THREE.Mesh(new THREE.CylinderGeometry(.43,.34,.12,48),mat('#d8dce0',.32,.18));bowl.position.set(-.55,1.33,-.12);bowl.castShadow=true;table.add(bowl);
+const flour=new THREE.Group();flour.position.set(-.55,1.4,-.12);table.add(flour);
+const mound=sphere(flour,'mąka',[.37,.085,.27],flourMat,[0,0,0]);
+const flourBits=new THREE.InstancedMesh(new THREE.SphereGeometry(.025,8,6),flourMat,180);const dummy=new THREE.Object3D();for(let i=0;i<180;i++){const a=Math.random()*Math.PI*2,r=Math.sqrt(Math.random())*.34;dummy.position.set(Math.cos(a)*r,(Math.random()-.5)*.045,Math.sin(a)*r*.7);const s=.25+Math.random()*.65;dummy.scale.setScalar(s);dummy.updateMatrix();flourBits.setMatrixAt(i,dummy.matrix)}flour.add(flourBits);
+const kokos=new THREE.Group();kokos.position.set(.65,0,1.1);scene.add(kokos);
+const torso=sphere(kokos,'tułów',[.39,.57,.25],shirt,[0,1.45,0]);
+const neck=sphere(kokos,'szyja',[.13,.18,.13],skin,[0,2.02,0]);
+const head=new THREE.Group();head.position.set(0,2.31,0);kokos.add(head);
+sphere(head,'głowa',[.34,.4,.31],skin,[0,0,0]);
+sphere(head,'włosy',[.35,.2,.32],mat('#3b2b24'),[0,.23,-.025]);
+for(const x of [-.13,.13]){sphere(head,'oko',[.045,.055,.028],white,[x,.035,.277]);sphere(head,'źrenica',[.02,.028,.014],black,[x,.03,.302]);}
+const nose=sphere(head,'nos',[.065,.08,.075],skin,[0,-.055,.31]);
+const smile=new THREE.Mesh(new THREE.TorusGeometry(.09,.012,8,20,Math.PI),black);smile.position.set(0,-.16,.285);smile.rotation.z=Math.PI;head.add(smile);
+const armPivots=[];
+for(const side of [-1,1]){const pivot=new THREE.Group();pivot.position.set(side*.36,1.82,0);kokos.add(pivot);armPivots.push(pivot);sphere(pivot,'ramię',[.13,.31,.14],shirt,[side*.02,-.2,0]);sphere(pivot,'przedramię',[.105,.27,.11],skin,[side*.035,-.49,.05]);sphere(pivot,'dłoń',[.12,.12,.1],skin,[side*.04,-.69,.1]);}
+for(const side of [-1,1]){sphere(kokos,'udo',[.17,.36,.18],pants,[side*.19,.7,0]);sphere(kokos,'but',[.19,.11,.28],dark,[side*.19,.13,.08]);}
+const rollPivot=new THREE.Group();rollPivot.position.set(0,-.69,.1);armPivots[1].add(rollPivot);
+const roll= new THREE.Mesh(new THREE.CylinderGeometry(.035,.045,.35,16),mat('#e6d5b4'));roll.rotation.z=Math.PI/2;roll.rotation.x=Math.PI/2;roll.castShadow=true;rollPivot.add(roll);
+const tip=new THREE.Mesh(new THREE.CylinderGeometry(.012,.018,.04,12),mat('#bba17a'));tip.position.set(0,0,.19);rollPivot.add(tip);rollPivot.visible=false;
+// subtle kitchen details
+const jar=new THREE.Mesh(new THREE.CylinderGeometry(.16,.14,.42,24),mat('#8caaa9',.25));jar.position.set(1.1,1.49,-.42);jar.castShadow=true;table.add(jar);
+const lid=new THREE.Mesh(new THREE.CylinderGeometry(.17,.17,.045,24),mat('#c7c9c2',.35));lid.position.set(1.1,1.72,-.42);table.add(lid);
+const mug=new THREE.Mesh(new THREE.CylinderGeometry(.12,.1,.22,24),mat('#d6dce0',.3));mug.position.set(.95,1.38,.1);table.add(mug);
+const handle=new THREE.Mesh(new THREE.TorusGeometry(.07,.018,8,18),mat('#d6dce0',.3));handle.position.set(1.08,1.4,.1);handle.rotation.y=Math.PI/2;table.add(handle);
+const state=document.querySelector('#status'),play=document.querySelector('#play');let startedAt=null,duration=8.5;
+function reset(){startedAt=null;play.disabled=false;play.textContent='▶ Odtwórz scenę';state.textContent='Kokos stoi przy stole.';flour.visible=true;flour.scale.setScalar(1);kokos.position.set(.65,0,1.1);kokos.rotation.set(0,0,0);head.rotation.set(0,0,0);armPivots[1].rotation.set(0,0,0);armPivots[0].rotation.set(0,0,0);rollPivot.visible=false;rollPivot.rotation.set(0,0,0);rollPivot.position.set(0,-.69,.1);}
+play.addEventListener('click',()=>{startedAt=performance.now();play.disabled=true;play.textContent='⏳ Animacja…';rollPivot.visible=true;});
+document.querySelector('#reset').addEventListener('click',reset);
+const clock=new THREE.Clock();
+function animate(now){requestAnimationFrame(animate);const t=startedAt===null?0:Math.min((now-startedAt)/1000,duration);if(startedAt!==null){if(t<1.2){state.textContent='Kokos sięga po rulonik.';armPivots[1].rotation.x=-t*.8;rollPivot.rotation.z=-t*.2;}else if(t<2.2){state.textContent='Kokos unosi rulonik.';armPivots[1].rotation.x=-.95;head.rotation.x=-.12;}else if(t<3.1){state.textContent='Kokos pochyla się nad stołem.';kokos.rotation.x=.13;head.rotation.x=.22;armPivots[1].rotation.x=-1.15;}else if(t<7.3){state.textContent='Przesuwa rulonik nad zwykłą mąką.';kokos.rotation.x=.13;head.rotation.x=.22;armPivots[1].rotation.x=-1.05;const p=(t-3.1)/4.2;rollPivot.position.x=-.34+p*.68;rollPivot.position.y=-.69+Math.sin(p*Math.PI)*.02;rollPivot.rotation.y=p*Math.PI*2;flour.scale.set(Math.max(.03,1-p*.98),Math.max(.03,1-p*.98),Math.max(.03,1-p*.98));}else{state.textContent='Scena zakończona. Kliknij „Od nowa”, aby powtórzyć.';play.disabled=false;play.textContent='▶ Odtwórz ponownie';}if(t>=duration){startedAt=null;kokos.rotation.x=0;head.rotation.x=0;armPivots[1].rotation.x=0;}}
+const elapsed=clock.getElapsedTime();if(startedAt===null){kokos.position.y=Math.sin(elapsed*1.5)*.012;head.rotation.y=Math.sin(elapsed*.45)*.035;}controls.update();renderer.render(scene,camera);}
+requestAnimationFrame(animate);
+addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);});
+</script>
+</body>
 </html>
