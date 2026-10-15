@@ -108,13 +108,13 @@ const pepTalks=[
 ];
 function say(item){$('chatAvatar').textContent=item[0];$('chatText').innerHTML=item[1]}
 function update(){ $('saves').textContent=goals;$('round').textContent=finished?'KONIEC':round+' / 5';$('fans').textContent=fans}
-function resetPos(){keeper.className='keeper';keeper.style.left='50%';keeper.style.top='50px';ball.className='ball';ball.style.left='50%';ball.style.top='284px';aimX=50;aimY=70;hasTarget=false;targetMark.style.display='none';$('hint').textContent='KLIKNIJ W BRAMCE, ABY WYBRAĆ MIEJSCE STRZAŁU';$('shoot').disabled=false}
+function resetPos(){keeper.className='keeper';keeper.style.left='50%';ball.className='ball';ball.style.left='50%';ball.style.top='284px';aimX=50;aimY=70;hasTarget=false;targetMark.style.display='none';$('hint').textContent='KLIKNIJ W BRAMCE, ABY WYBRAĆ MIEJSCE STRZAŁU';$('shoot').disabled=false}
 function clampGoalHeight(){return Math.max(90,Math.min(150,window.innerWidth*.30))}
  function flash(text){$('flashText').textContent=text;$('flash').classList.add('show');setTimeout(()=>$('flash').classList.remove('show'),850)}
 function finish(){finished=true;update();$('modalTitle').textContent=goals>=4?'🔥 KRÓL KARNYCH!':'🏁 KONIEC SERII';$('modalText').textContent='Gole: '+goals+' z 5. '+(goals>=4?'Kibice skandują: KOKS! KOKS! Jesteś legendą stadionu.':goals>=2?'Niezły mecz, kapitanie! Jeszcze trochę treningu i będzie perfekcja.':'Każda legenda zaczyna od treningu. Rewanż?');$('modal').classList.add('open')}
 function startShot(){
 if(busy||finished)return;
-if(!hasTarget){flash('WYBIERZ CEL! 🎯');$('hint').textContent='NAJPIERW KLIKNIJ W BRAMCE, POTEM PRZYTRZYMAJ STRZAŁ';return}
+if(!hasTarget){flash('WYBIERZ CEL! 🎯');$('hint').textContent='NAJPIERW KLIKNIJ W BRAMCE, POTEM STUKNIJ STRZAŁ';return}
 busy=true;$('shoot').disabled=true;$('shoot').textContent='⏳ STRZAŁ W TOKU';$('hint').textContent='STRZAŁ W RUCHU! BRAMKARZ REAGUJE…';
 const keeperDirection=aimX<36?'left':aimX>64?'right':aimY<65?(Math.random()<.5?'left':'right'):'center';
 const x=aimX;
@@ -146,12 +146,12 @@ e.preventDefault();
 aimX=Math.max(6,Math.min(94,(px-rect.left)/rect.width*100));
 aimY=Math.max(18,Math.min(145,py-rect.top));
 hasTarget=true;targetMark.style.left=aimX+'%';targetMark.style.top=aimY+'px';targetMark.style.display='block';
-$('hint').textContent='CEL USTAWIONY! PRZYTRZYMAJ STRZAŁ I PUŚĆ';
+$('hint').textContent='CEL USTAWIONY! STUKNIJ STRZAŁ';
 });
 
 
 
-$('reset').addEventListener('click',()=>{clearTimeout(shotTimer);goals=0;round=1;fans=0;busy=false;finished=false;$('modal').classList.remove('open');$('shoot').textContent='⚽ STRZAŁ!';$('shoot').disabled=false;resetPos();update();say(['😎','<b>Kapitan Koks:</b> Nowa seria! Poczekaj na odpowiedni kierunek i stuknij STRZAŁ!'])});
+$('reset').addEventListener('click',()=>{clearTimeout(shotTimer);goals=0;round=1;fans=0;busy=false;finished=false;$('modal').classList.remove('open');$('shoot').textContent='⚽ STRZAŁ!';$('shoot').disabled=false;resetPos();update();say(['😎','<b>Kapitan Koks:</b> Nowa seria! Wybierz cel i stuknij STRZAŁ!'])});
 $('playAgain').addEventListener('click',()=>{$('modal').classList.remove('open');$('reset').click()});
 $('joke').addEventListener('click',()=>say(jokes[Math.floor(Math.random()*jokes.length)]));
 $('pep').addEventListener('click',()=>say(pepTalks[Math.floor(Math.random()*pepTalks.length)]));
