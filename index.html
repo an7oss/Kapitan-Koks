@@ -50,12 +50,13 @@ footer{margin-top:auto;padding:18px 0 22px;color:#656970;font-size:.68rem;displa
 </div>
 <div id="app">
  <main class="screen" aria-live="polite">
-  <header><div class="brand">KOKOS<b>®</b> <span style="color:#8d9299;font-weight:500">/ HISTORIA PRAWDZIWA</span></div><button class="small-button" id="restart">↻ Od początku</button></header>
+  <header><div class="brand">KOKOS<b>®</b> <span style="color:#8d9299;font-weight:500">/ TRYB FABULARNY</span></div><div style="display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end"><button class="small-button" id="journal-toggle">☷ Dziennik</button><button class="small-button" id="restart">↻ Od początku</button></div></header>
   <section class="status">
    <div class="stat"><div class="stat-label">Reputacja</div><div class="stat-value" id="rep">0</div></div>
    <div class="stat"><div class="stat-label">Forma</div><div class="stat-value" id="form">72</div></div>
    <div class="stat"><div class="stat-label">C‑Max</div><div class="stat-value" id="car">84%</div></div>
   </section>
+  <section id="journal" style="display:none;background:#111317;border:1px solid #30343b;border-radius:14px;padding:14px;margin:2px 0 12px"><strong style="color:var(--lime)">DZIENNIK KOKOSA</strong><p style="font-size:.78rem;color:var(--muted);margin:6px 0 10px">Twoje wybory zapisują się na tym urządzeniu.</p><div id="journal-content" style="font-size:.82rem;line-height:1.6"></div><div id="badges" style="display:flex;gap:6px;flex-wrap:wrap;margin-top:10px"></div></section>
   <div class="chapter" id="chapter">Rozdział 1</div>
   <h2 class="scene-title" id="title"></h2>
   <div class="art" id="art" aria-hidden="true">🥅</div>
@@ -85,7 +86,11 @@ endcalm:{chapter:"Zakończenie · Cisza po burzy",title:"Żadnego spokoju, tylko
 hidehunt:{chapter:"Rozdział 3 · Podchody",title:"Kto kogo śledzi?",art:"🌒👟",story:"Ekipa rusza przez osiedle. Ktoś twierdzi, że widział Jagiellończyków przy garażach, ale trop okazuje się fałszywy. Po chwili widać ich przy pustym boisku. Lecą wyzwiska, ktoś rzuca szalik na ziemię, robi się przepychanka i chaos. Po chwili słychać syreny i obie grupy rozbiegają się w różne strony. Kokos nie wie, czy wygrał, czy wpakował się w większy przypał.",dialogue:"KOKOS: „To miały być podchody, a wyszła najgorsza wycieczka integracyjna świata.”",choices:[["A","Zostać z ekipą i stanąć twarzą w twarz z rywalami",{rep:3,form:-8,car:0},"Ostatnia konfrontacja rozstrzygnie, kto odpuści.","derbychaos"],["B","Zniknąć w bocznej uliczce, zanim wróci patrol",{rep:1,form:-2,car:0},"Ucieczka nie kończy konfliktu, tylko przesuwa finał.","endcalm"]]},
 derbychaos:{chapter:"Rozdział 4 · Derby na boisku",title:"Wszyscy przyszli, nikt nie ma planu",art:"⚽💢",story:"Na boisku spotykają się obie ekipy. Zamiast rozmowy lecą okrzyki i prowokacje. Ktoś kopie piłkę w tłum, ktoś przewraca ławkę, zaczyna się przepychanka i wszyscy krzyczą naraz. Nie ma czystego zwycięstwa — po chwili każdy próbuje wyjść z zamieszania z twarzą, a syreny słychać coraz bliżej. Kokos musi zdecydować, czy zostać i ponieść konsekwencje, czy zniknąć z kadru.",dialogue:"NET: „To nie finał pucharu, idioci!” KOKOS: „To kto przewrócił ławkę?!”",choices:[["A","Zostać i powiedzieć, co się wydarzyło",{rep:2,form:-3,car:0},"Awantura się kończy, ale plotki dopiero startują.","endresponsible"],["B","Wyrwać się z tłumu i wrócić do C-Maxa",{rep:1,form:-5,car:-2},"Kokos znika, ale internet już ma jego twarz.","endcalm"]]},
 };
-let state={scene:"start",rep:0,form:72,car:84,steps:0,seen:[]};
+let state={scene:"start",rep:0,form:72,car:84,steps:0,seen:[],log:[]};
+const SAVE_KEY="kokos_game_save_v1";
+function saveGame(){try{localStorage.setItem(SAVE_KEY,JSON.stringify(state))}catch(e){}}
+function loadGame(){try{const raw=localStorage.getItem(SAVE_KEY);if(!raw)return false;const data=JSON.parse(raw);if(!data||!scenes[data.scene])return false;state={scene:data.scene,rep:Number(data.rep)||0,form:clamp(Number(data.form)||0,0,100),car:clamp(Number(data.car)||0,0,100),steps:Number(data.steps)||0,seen:Array.isArray(data.seen)?data.seen:[],log:Array.isArray(data.log)?data.log:[]};return true}catch(e){return false}}
+function renderJournal(){const panel=$("journal");if(!panel)return;const content=$("journal-content");if(!state.log.length){content.textContent="Na razie pusto. Wybierz opcję, żeby zapisać pierwszy wpis."; }else{content.innerHTML="";state.log.slice().reverse().forEach((entry,i)=>{const row=document.createElement("div");row.style.cssText="padding:8px 0;border-bottom:1px solid #252930";const strong=document.createElement("strong");strong.textContent=(state.log.length-i)+". "+entry.scene;const p=document.createElement("div");p.style.color="#c2c5ca";p.textContent="Wybrano: "+entry.choice;row.append(strong,p);content.append(row)})}const badges=$("badges");badges.innerHTML="";const earned=[];if(state.steps>=5)earned.push("🧭 W głębi fabuły");if(state.rep>=8)earned.push("📣 Lokalna legenda");if(state.form<=25)earned.push("🥴 Ostatnie siły");if(state.car<=60)earned.push("🔧 Mechanik płacze");if(state.scene.startsWith("end"))earned.push("🏁 Historia domknięta");if(!earned.length)earned.push("🔒 Osiągnięcia odblokują się w trakcie gry");earned.forEach(t=>{const b=document.createElement("span");b.textContent=t;b.style.cssText="font-size:.7rem;padding:6px 8px;border-radius:8px;background:#252a20;color:#d6ff46";badges.append(b)})}
 const $=id=>document.getElementById(id);
 function clamp(n,min,max){return Math.max(min,Math.min(max,n))}
 function render(){
@@ -97,6 +102,7 @@ function render(){
  $("rep").textContent=state.rep;$("form").textContent=state.form;$("car").textContent=state.car+"%";
  $("progress").textContent="SCENA "+Math.max(1,state.steps+1);
  $("choices").innerHTML="";
+ renderJournal();
  if(s.ending){const box=document.createElement("div");box.className="ending";const h=document.createElement("h3");h.textContent="TWOJE ZAKOŃCZENIE";const p=document.createElement("p");p.textContent=s.ending;box.append(h,p);$("choices").append(box)}
  s.choices.forEach((c,i)=>{
   const b=document.createElement("button");b.className="choice";
@@ -109,10 +115,11 @@ function render(){
 function choose(c){
  if(c[4]==="restart"){reset();return}
  const delta=c[3]||{};state.rep+=delta.rep||0;state.form=clamp(state.form+(delta.form||0),0,100);state.car=clamp(state.car+(delta.car||0),0,100);
- state.steps++;state.seen.push(state.scene);let next=c[4];if(next==="ending" && (state.form<60 || state.car<55 || state.rep<2)) next="endchaos";state.scene=next;render();window.scrollTo({top:0,behavior:"smooth"});
+ state.log.push({scene:scenes[state.scene]?.title||state.scene,choice:c[1]});state.steps++;state.seen.push(state.scene);let next=c[4];if(next==="ending" && (state.form<60 || state.car<55 || state.rep<2)) next="endchaos";state.scene=next;saveGame();render();window.scrollTo({top:0,behavior:"smooth"});
 }
-function reset(){state={scene:"start",rep:0,form:72,car:84,steps:0,seen:[]};$("intro").style.display="none";render();window.scrollTo(0,0)}
-$("start").addEventListener("click",reset);$("restart").addEventListener("click",()=>{$("intro").style.display="flex";state={scene:"start",rep:0,form:72,car:84,steps:0,seen:[]};render()});
+function reset(){state={scene:"start",rep:0,form:72,car:84,steps:0,seen:[],log:[]};saveGame();$("intro").style.display="none";render();window.scrollTo(0,0)}
+$("start").addEventListener("click",()=>{if(!loadGame())reset();else{$("intro").style.display="none";render()}});$("restart").addEventListener("click",()=>{if(confirm("Na pewno zacząć od nowa? Dotychczasowy zapis zostanie wyczyszczony.")){state={scene:"start",rep:0,form:72,car:84,steps:0,seen:[],log:[]};saveGame();$("intro").style.display="none";render()}});$("journal-toggle").addEventListener("click",()=>{const p=$("journal");p.style.display=p.style.display==="none"?"block":"none";renderJournal()});
+if(loadGame()){$("intro").querySelector(".primary").textContent="KONTYNUUJ GRĘ"}
 render();
 </script>
 </body>
