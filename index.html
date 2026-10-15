@@ -15,6 +15,10 @@
 .keeper.dive-left{left:20%!important;top:34px!important;transform:translateX(-50%) rotate(-72deg) scale(1.18,.86);animation:diveLeft .48s cubic-bezier(.2,.7,.25,1) both}
 .keeper.dive-right{left:80%!important;top:34px!important;transform:translateX(-50%) rotate(72deg) scale(1.18,.86);animation:diveRight .48s cubic-bezier(.2,.7,.25,1) both}
 .keeper.dive-center{top:42px!important;transform:translateX(-50%) scale(1.08,.9);animation:catchCenter .42s ease-out both}
+.keeper.dive-left-top{left:22%!important;top:12px!important;transform:translateX(-50%) rotate(-58deg) scale(1.05,.82);animation:diveLeft .48s cubic-bezier(.2,.7,.25,1) both}
+.keeper.dive-left-bottom{left:22%!important;top:calc(10px + clamp(90px,30vw,150px) - clamp(70px,23vw,117px))!important;transform:translateX(-50%) rotate(-72deg) scale(1.18,.86);animation:diveLeft .48s cubic-bezier(.2,.7,.25,1) both}
+.keeper.dive-right-top{left:78%!important;top:12px!important;transform:translateX(-50%) rotate(58deg) scale(1.05,.82);animation:diveRight .48s cubic-bezier(.2,.7,.25,1) both}
+.keeper.dive-right-bottom{left:78%!important;top:calc(10px + clamp(90px,30vw,150px) - clamp(70px,23vw,117px))!important;transform:translateX(-50%) rotate(72deg) scale(1.18,.86);animation:diveRight .48s cubic-bezier(.2,.7,.25,1) both}
 .keeper.catch{filter:drop-shadow(0 0 9px #c8ff42) drop-shadow(0 5px 2px #05201077)}
 .keeper.punch{animation:punchBall .5s ease-out both;filter:drop-shadow(0 0 8px #fff2a8)}
 @keyframes diveLeft{0%{transform:translateX(-50%) rotate(0) scale(1)}45%{transform:translateX(-50%) rotate(-82deg) scale(1.2,.8)}100%{transform:translateX(-50%) rotate(-72deg) scale(1.18,.86)}}
@@ -116,20 +120,25 @@ function startShot(){
 if(busy||finished)return;
 if(!hasTarget){flash('WYBIERZ CEL! 🎯');$('hint').textContent='NAJPIERW KLIKNIJ W BRAMCE, POTEM STUKNIJ STRZAŁ';return}
 busy=true;$('shoot').disabled=true;$('shoot').textContent='⏳ STRZAŁ W TOKU';$('hint').textContent='STRZAŁ W RUCHU! BRAMKARZ REAGUJE…';
-const keeperDirection=aimX<36?'left':aimX>64?'right':aimY<65?(Math.random()<.5?'left':'right'):'center';
+const goalRect=$('goal').getBoundingClientRect();
+const pitchRect=pitch.getBoundingClientRect();
+const shotZone=aimX>=35&&aimX<=65?'center':(aimX<50?'left':'right')+'-'+(aimY<(goalRect.top-pitchRect.top+goalRect.height/2)?'top':'bottom');
+const zones=['left-top','left-bottom','right-top','right-bottom','center'];
+const keeperZone=zones[Math.floor(Math.random()*zones.length)];
+const keeperClass=keeperZone==='center'?'dive-center':'dive-'+keeperZone;
 const x=aimX;
 const y=aimY;
 ball.className='ball flying';ball.style.left=x+'%';ball.style.top=y+'px';
 targetMark.style.display='none';
-keeper.className='keeper '+(keeperDirection==='left'?'dive-left':keeperDirection==='right'?'dive-right':'dive-center');
+keeper.className='keeper '+keeperClass;
 
 shotTimer=setTimeout(()=>{
-if(aimY>=18 && aimY<=clampGoalHeight() && Math.abs((keeperDirection==='left'?20:keeperDirection==='right'?80:50)-aimX)<=(keeperDirection==='center'?15:21)){
+if(shotZone===keeperZone && aimY>=18 && aimY<=clampGoalHeight()){
  const caught=Math.random()<.58;
 if(caught){
-keeper.classList.add('catch');ball.className='ball saved';ball.style.left=(keeperDirection==='left'?'25%':keeperDirection==='right'?'75%':'50%');ball.style.top=Math.max(aimY,65)+'px';flash('ZŁAPANA! 🧤');say(['🧤','<b>Kapitan Koks:</b> Pewny chwyt! Bramkarz przyciągnął piłkę do rękawic!'])
+keeper.classList.add('catch');ball.className='ball saved';ball.style.left=(keeperZone.startsWith('left')?'25%':keeperZone.startsWith('right')?'75%':'50%');ball.style.top=Math.max(aimY,65)+'px';flash('ZŁAPANA! 🧤');say(['🧤','<b>Kapitan Koks:</b> Pewny chwyt! Bramkarz przyciągnął piłkę do rękawic!'])
 }else{
-keeper.classList.add('punch');ball.className='ball deflected';ball.style.left=(keeperDirection==='left'?'34%':keeperDirection==='right'?'66%':'58%');ball.style.top=Math.max(aimY-45,18)+'px';flash('WYBICIE! ✋');say(['🧤','<b>Kapitan Koks:</b> Świetna parada! Bramkarz wybija piłkę pięściami!'])
+keeper.classList.add('punch');ball.className='ball deflected';ball.style.left=(keeperZone.startsWith('left')?'34%':keeperZone.startsWith('right')?'66%':'58%');ball.style.top=Math.max(aimY-45,18)+'px';flash('WYBICIE! ✋');say(['🧤','<b>Kapitan Koks:</b> Świetna parada! Bramkarz wybija piłkę pięściami!'])
 }}else{goals++;fans+=Math.floor(Math.random()*5)+3;flash('GOOOOL! ⚽🔥');say(['🥳','<b>Kapitan Koks:</b> SIATKA ZATRZEPOTAŁA! Tak się robi karne, szefie!'])}
 round++;update();
 if(round>5){setTimeout(finish,850);busy=false;$('shoot').textContent='SERIA ZAKOŃCZONA';return}
