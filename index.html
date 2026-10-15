@@ -124,9 +124,13 @@ keeper.className='keeper '+(keeperDirection==='left'?'dive-left':keeperDirection
 
 shotTimer=setTimeout(()=>{
 if(shotPower>92){flash('POZA BRAMKĄ! 🚀');say(['😵','<b>Kapitan Koks:</b> O kurczę, tak mocno kopnąłeś, że poleciała na trybuny! Spróbuj puścić trochę wcześniej.'])}
-else if(keeperDirection===aimSide){
-keeper.classList.add('catch');ball.className='ball saved';ball.style.left=(keeperDirection==='left'?'29%':keeperDirection==='right'?'71%':'50%');ball.style.top='88px';flash('OBRONA! 🧤');say(['🧤','<b>Kapitan Koks:</b> ZŁAPAŁEM! Bramkarskie ręce jak magnesy!'])
-}else{goals++;fans+=Math.floor(Math.random()*5)+3;flash('GOOOOL! ⚽🔥');say(['🥳','<b>Kapitan Koks:</b> SIATKA ZATRZEPOTAŁA! Tak się robi karne, szefie!'])}
+else if(shotPower<=96 && aimY>=18 && aimY<=142 && Math.abs((keeperDirection==='left'?20:keeperDirection==='right'?80:50)-aimX)<=(keeperDirection==='center'?15:21)){
+const caught=Math.random()<.58;
+if(caught){
+keeper.classList.add('catch');ball.className='ball saved';ball.style.left=(keeperDirection==='left'?'25%':keeperDirection==='right'?'75%':'50%');ball.style.top=Math.max(aimY,65)+'px';flash('ZŁAPANA! 🧤');say(['🧤','<b>Kapitan Koks:</b> Pewny chwyt! Bramkarz przyciągnął piłkę do rękawic!'])
+}else{
+keeper.classList.add('punch');ball.className='ball deflected';ball.style.left=(keeperDirection==='left'?'34%':keeperDirection==='right'?'66%':'58%');ball.style.top=Math.max(aimY-45,18)+'px';flash('WYBICIE! ✋');say(['🧤','<b>Kapitan Koks:</b> Świetna parada! Bramkarz wybija piłkę pięściami!'])
+}}else{goals++;fans+=Math.floor(Math.random()*5)+3;flash('GOOOOL! ⚽🔥');say(['🥳','<b>Kapitan Koks:</b> SIATKA ZATRZEPOTAŁA! Tak się robi karne, szefie!'])}
 round++;update();
 if(round>5){setTimeout(finish,850);busy=false;$('shoot').textContent='SERIA ZAKOŃCZONA';return}
 setTimeout(()=>{resetPos();busy=false;$('shoot').textContent='⚽ STRZAŁ!';},850)
