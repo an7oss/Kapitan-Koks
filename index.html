@@ -10,7 +10,11 @@
 *{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button{font:inherit}
 #app{min-height:100svh;background:radial-gradient(ellipse at 50% 0%,#1b2024 0,#08090b 62%);padding:env(safe-area-inset-top) 16px env(safe-area-inset-bottom);display:flex;justify-content:center}
 .screen{width:100%;max-width:760px;min-height:100svh;display:flex;flex-direction:column}
-#intro{align-items:center;justify-content:center;text-align:center;background:#000;position:fixed;inset:0;z-index:10;padding:24px}
+#intro{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:#000;position:fixed;inset:0;z-index:10;padding:24px;gap:28px}
+#intro .logo{margin:0;max-width:900px;color:#f7ffff;text-shadow:0 0 8px rgba(170,245,255,.95),0 0 22px rgba(95,220,255,.8),0 0 48px rgba(75,130,255,.55);letter-spacing:.025em;line-height:1.05}
+#intro .primary{margin:0;min-width:220px;padding:17px 30px;border:1px solid rgba(255,255,255,.85);border-radius:16px;background:linear-gradient(135deg,#ffffff 0%,#c8f8ff 28%,#8a9dff 62%,#e8faff 100%);color:#080a14;font-weight:950;letter-spacing:.12em;box-shadow:0 0 10px rgba(255,255,255,.85),0 0 26px rgba(110,210,255,.75),0 0 55px rgba(106,116,255,.45),inset 0 2px 2px rgba(255,255,255,.95);text-shadow:0 1px 0 rgba(255,255,255,.8);transition:transform .18s,box-shadow .18s}
+#intro .primary:hover{transform:translateY(-2px);box-shadow:0 0 14px rgba(255,255,255,.95),0 0 34px rgba(110,210,255,.9),0 0 68px rgba(106,116,255,.6),inset 0 2px 2px rgba(255,255,255,.95)}
+#intro .primary:active{transform:scale(.97);box-shadow:0 0 8px rgba(255,255,255,.8),0 0 20px rgba(110,210,255,.7),inset 0 2px 2px rgba(255,255,255,.9)}
 .kicker{letter-spacing:.28em;text-transform:uppercase;color:var(--lime);font-size:.68rem;font-weight:800}
 .logo{font-size:clamp(2.1rem,9vw,5rem);line-height:.94;font-weight:1000;letter-spacing:-.065em;margin:18px 0 12px;text-wrap:balance}
 .logo span{display:block;color:var(--lime)}
