@@ -2,172 +2,112 @@
 <html lang="pl">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<meta name="theme-color" content="#071a12">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>Kapitan Koks — Bramkarz Legend</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#08090b">
+<title>KOKOS. HISTORIA PRAWDZIWA.</title>
 <style>
-:root{color-scheme:dark;--lime:#c8ff42;--panel:#10251c;--muted:#9bb4a5;--white:#f5ffe9}
-*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:ui-rounded,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#06140e;color:var(--white);overscroll-behavior:none}body{min-height:100svh;background:radial-gradient(ellipse at 50% -15%,#245b39 0,#0b2418 48%,#06140e 100%);padding:env(safe-area-inset-top) 12px env(safe-area-inset-bottom);display:flex;justify-content:center}.app{width:min(100%,520px);padding:12px 0 20px}.top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}.brand{font-size:11px;letter-spacing:2.6px;color:var(--lime);font-weight:900}.title{font-size:clamp(24px,7vw,36px);font-weight:1000;line-height:.98;letter-spacing:-1.5px;margin-top:3px}.title span{color:var(--lime)}.pill{background:#193829;border:1px solid #345b43;padding:8px 11px;border-radius:99px;font-size:12px;font-weight:800;color:var(--lime);white-space:nowrap}.scorebar{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:12px}.stat{background:#0d2118;border:1px solid #21412e;border-radius:15px;padding:10px 8px;text-align:center}.stat strong{display:block;font-size:21px;color:var(--lime);line-height:1.1}.stat small{display:block;font-size:10px;color:var(--muted);letter-spacing:1px;margin-top:4px;font-weight:800}.stadium{position:relative;border:1px solid #2a6540;border-radius:22px;overflow:hidden;background:#123e28;box-shadow:0 16px 45px #0006;touch-action:pan-y}.sky{height:100px;background:linear-gradient(#193b42,#6b9c68 78%,#327043);position:relative;overflow:hidden}.crowd{position:absolute;bottom:0;left:0;right:0;height:42px;background:repeating-linear-gradient(90deg,#d7d1a2 0 4px,#d15d4b 4px 8px,#314c76 8px 12px,#172c24 12px 16px);opacity:.55;clip-path:polygon(0 28%,4% 8%,8% 27%,12% 5%,16% 24%,20% 4%,24% 28%,28% 0,32% 25%,36% 5%,40% 28%,44% 2%,48% 22%,52% 0,56% 24%,60% 4%,64% 26%,68% 0,72% 25%,76% 5%,80% 28%,84% 2%,88% 24%,92% 4%,96% 25%,100% 0,100% 100%,0 100%)}.stadiumlabel{position:absolute;top:15px;left:0;right:0;text-align:center;font-size:10px;font-weight:900;letter-spacing:3px;color:#f2ffe0;text-shadow:0 2px 4px #000}.pitch{height:330px;position:relative;background:repeating-linear-gradient(0deg,#176338 0 43px,#1a6d3c 43px 86px);overflow:hidden}.pitch:before{content:"";position:absolute;left:8%;right:8%;top:14px;height:100px;border:2px solid #e8f5d5aa;border-bottom:0;border-radius:5px 5px 0 0}.pitch:after{content:"";position:absolute;left:27%;right:27%;top:14px;height:52px;border:2px solid #e8f5d566;border-top:0;border-radius:0 0 50% 50%}.goal{position:absolute;z-index:2;left:4%;right:4%;top:10px;height:clamp(90px,30vw,150px);border:6px solid #f4f5df;border-bottom-width:4px;border-radius:3px 3px 0 0;background:repeating-linear-gradient(90deg,transparent 0 19px,#eaf7e277 20px 22px),repeating-linear-gradient(0deg,transparent 0 18px,#eaf7e277 19px 21px);box-shadow:0 0 0 2px #152d20,0 8px 18px #06140e55}.keeper{position:absolute;z-index:5;left:50%;top:calc(10px + clamp(90px,30vw,150px) - clamp(70px,23vw,117px));transform:translateX(-50%);width:clamp(48px,14vw,68px);height:clamp(70px,23vw,117px);filter:drop-shadow(0 5px 2px #05201077);transition:left .18s ease,top .18s ease;user-select:none;pointer-events:none}.keeper svg{display:block;width:100%;height:100%;overflow:visible}.ball{position:absolute;z-index:6;left:50%;top:240px;transform:translate(-50%,-50%);font-size:33px;filter:drop-shadow(0 5px 2px #0007);transition:left .65s cubic-bezier(.2,.8,.2,1),top .65s cubic-bezier(.2,.8,.2,1);user-select:none}.ball.flying{transform:translate(-50%,-50%) rotate(500deg) scale(.72)}.aimhint{position:absolute;bottom:18px;left:0;right:0;text-align:center;font-size:12px;font-weight:900;color:#eaffd4;text-shadow:0 2px 4px #0008;z-index:4}.flash{position:absolute;inset:0;z-index:8;display:flex;align-items:center;justify-content:center;pointer-events:none;opacity:0;transition:opacity .15s}.flash.show{opacity:1}.flash span{background:#071a12dd;border:2px solid var(--lime);color:var(--lime);padding:13px 18px;border-radius:16px;font-size:23px;font-weight:1000;transform:rotate(-4deg);box-shadow:0 10px 25px #0006}.meterWrap{margin-top:12px;background:#0d2118;border:1px solid #21412e;border-radius:15px;padding:11px 12px}.meterTitle,.meterScale{display:flex;justify-content:space-between;gap:8px;font-size:10px;font-weight:900;letter-spacing:.7px}.meterTitle{margin-bottom:9px;color:#eaffd4}.meterTitle span:last-child{color:var(--lime)}.meter{height:20px;border-radius:7px;position:relative;overflow:hidden;background:#25442d;border:1px solid #54714a;touch-action:manipulation}.meterGreen{position:absolute;inset:0 60% 0 0;background:#46c65a}.meterYellow{position:absolute;left:40%;right:18%;top:0;bottom:0;background:#f0c637}.meterRed{position:absolute;left:82%;right:0;top:0;bottom:0;background:#ed4545}.meterNeedle{position:absolute;left:0;top:-2px;bottom:-2px;width:5px;background:#fff;border:1px solid #17241a;border-radius:4px;box-shadow:0 0 8px #fff;transform:translateX(-50%)}.meterScale{color:#91a997;margin-top:6px}.pitch{touch-action:manipulation}
-.targetMark{position:absolute;z-index:7;left:50%;top:70px;width:34px;height:34px;border:3px solid #c8ff42;border-radius:50%;transform:translate(-50%,-50%);box-shadow:0 0 0 5px #c8ff4233,0 0 16px #c8ff42;background:#c8ff4222;pointer-events:none;display:none}.targetMark:before,.targetMark:after{content:'';position:absolute;background:#f5ffe9;left:50%;top:50%;transform:translate(-50%,-50%)}.targetMark:before{width:2px;height:46px}.targetMark:after{width:46px;height:2px}
-.keeper{transform:translateX(-50%);transform-origin:50% 88%;transition:left .42s cubic-bezier(.2,.8,.2,1),top .42s cubic-bezier(.2,.8,.2,1),transform .42s cubic-bezier(.2,.8,.2,1)}
-.keeper.dive-left{left:20%!important;top:34px!important;transform:translateX(-50%) rotate(-72deg) scale(1.18,.86);animation:diveLeft .48s cubic-bezier(.2,.7,.25,1) both}
-.keeper.dive-right{left:80%!important;top:34px!important;transform:translateX(-50%) rotate(72deg) scale(1.18,.86);animation:diveRight .48s cubic-bezier(.2,.7,.25,1) both}
-.keeper.dive-center{top:42px!important;transform:translateX(-50%) scale(1.08,.9);animation:catchCenter .42s ease-out both}
-.keeper.dive-left-top{left:22%!important;top:12px!important;transform:translateX(-50%) rotate(-58deg) scale(1.05,.82);animation:diveLeft .48s cubic-bezier(.2,.7,.25,1) both}
-.keeper.dive-left-bottom{left:22%!important;top:calc(10px + clamp(90px,30vw,150px) - clamp(70px,23vw,117px))!important;transform:translateX(-50%) rotate(-72deg) scale(1.18,.86);animation:diveLeft .48s cubic-bezier(.2,.7,.25,1) both}
-.keeper.dive-right-top{left:78%!important;top:12px!important;transform:translateX(-50%) rotate(58deg) scale(1.05,.82);animation:diveRight .48s cubic-bezier(.2,.7,.25,1) both}
-.keeper.dive-right-bottom{left:78%!important;top:calc(10px + clamp(90px,30vw,150px) - clamp(70px,23vw,117px))!important;transform:translateX(-50%) rotate(72deg) scale(1.18,.86);animation:diveRight .48s cubic-bezier(.2,.7,.25,1) both}
-.keeper.catch{filter:drop-shadow(0 0 9px #c8ff42) drop-shadow(0 5px 2px #05201077)}
-.keeper.punch{animation:punchBall .5s ease-out both;filter:drop-shadow(0 0 8px #fff2a8)}
-@keyframes diveLeft{0%{transform:translateX(-50%) rotate(0) scale(1)}45%{transform:translateX(-50%) rotate(-82deg) scale(1.2,.8)}100%{transform:translateX(-50%) rotate(-72deg) scale(1.18,.86)}}
-@keyframes diveRight{0%{transform:translateX(-50%) rotate(0) scale(1)}45%{transform:translateX(-50%) rotate(82deg) scale(1.2,.8)}100%{transform:translateX(-50%) rotate(72deg) scale(1.18,.86)}}
-@keyframes catchCenter{0%{transform:translateX(-50%) scale(1)}45%{transform:translateX(-50%) scale(1.12,.84) translateY(-8px)}100%{transform:translateX(-50%) scale(1.08,.9)}}
-@keyframes punchBall{0%{transform:translateX(-50%) rotate(0)}40%{transform:translateX(-50%) rotate(-18deg) scale(1.08)}100%{transform:translateX(-50%) rotate(0) scale(1)}}
-.ball.deflected{transition:left .35s ease-out,top .35s ease-out;transform:translate(-50%,-50%) rotate(620deg) scale(.7)}
-.ball.saved{transition:left .42s ease,top .42s ease;transform:translate(-50%,-50%) rotate(320deg) scale(.82)}
-.under{display:flex;gap:8px;margin-top:10px}.btn{appearance:none;border:0;border-radius:15px;padding:14px 12px;font:900 14px system-ui;cursor:pointer;touch-action:manipulation;min-height:48px}.btn:active{transform:scale(.98)}.primary{background:var(--lime);color:#102014;flex:1;box-shadow:0 5px 0 #77a51f}.secondary{background:#183526;border:1px solid #31563e;color:var(--white);flex:1}.tip{font-size:11px;color:#a5beac;text-align:center;margin:12px 6px 0;line-height:1.5}.section{margin-top:15px;background:linear-gradient(135deg,#10271b,#0b1c14);border:1px solid #21422d;border-radius:19px;padding:14px}.sectionhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.sectionhead strong{font-size:14px}.sectionhead small{color:var(--muted);font-size:10px}.dialogue{display:flex;align-items:center;gap:12px}.avatar{width:49px;height:49px;flex:0 0 49px;border-radius:16px;background:#294735;display:grid;place-items:center;font-size:27px}.bubble{background:#193526;border:1px solid #2d5139;border-radius:4px 15px 15px 15px;padding:10px 12px;font-size:13px;line-height:1.4;flex:1}.bubble b{color:var(--lime)}.chatchoices{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.chatchoices .btn{font-size:12px;padding:10px;min-height:43px}.notice{position:fixed;inset:0;background:#020905c9;z-index:20;display:none;align-items:flex-end;justify-content:center;padding:14px}.notice.open{display:flex}.modal{width:min(100%,480px);background:#10251a;border:1px solid #416647;border-radius:24px;padding:20px;box-shadow:0 20px 70px #0009}.modal h2{margin:0 0 8px;font-size:25px}.modal p{color:#c0d3c4;line-height:1.55;font-size:14px}.modal .btn{width:100%;margin-top:8px}.foot{text-align:center;color:#64816d;font-size:10px;margin:15px 0 0}@media(min-height:850px){.pitch{height:370px}.ball{top:270px}.sky{height:115px}}@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+:root{color-scheme:dark;--bg:#08090b;--panel:#14161a;--line:#30343b;--text:#f5f5f0;--muted:#a7abb3;--lime:#d6ff46;--orange:#ff9b54}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button{font:inherit}
+#app{min-height:100svh;background:radial-gradient(ellipse at 50% 0%,#1b2024 0,#08090b 62%);padding:env(safe-area-inset-top) 16px env(safe-area-inset-bottom);display:flex;justify-content:center}
+.screen{width:100%;max-width:760px;min-height:100svh;display:flex;flex-direction:column}
+#intro{align-items:center;justify-content:center;text-align:center;background:#050505;position:fixed;inset:0;z-index:10;padding:24px}
+.kicker{letter-spacing:.28em;text-transform:uppercase;color:var(--lime);font-size:.68rem;font-weight:800}
+.logo{font-size:clamp(2.1rem,9vw,5rem);line-height:.94;font-weight:1000;letter-spacing:-.065em;margin:18px 0 12px;text-wrap:balance}
+.logo span{display:block;color:var(--lime)}
+.subtitle{color:#aaa;font-size:.9rem;max-width:340px;line-height:1.6}
+.primary{margin-top:28px;border:0;border-radius:14px;background:var(--lime);color:#111;font-weight:950;padding:16px 25px;min-width:190px;box-shadow:0 7px 0 #8ea72d;cursor:pointer}
+.primary:active{transform:translateY(3px);box-shadow:0 4px 0 #8ea72d}
+.intro-note{position:absolute;bottom:24px;color:#555;font-size:.7rem;letter-spacing:.12em}
+header{display:flex;justify-content:space-between;align-items:center;padding:18px 2px 12px;border-bottom:1px solid var(--line);gap:12px}
+.brand{font-size:.83rem;font-weight:1000;letter-spacing:.08em}.brand b{color:var(--lime)}
+.small-button{background:#191b20;border:1px solid var(--line);color:#ddd;border-radius:10px;padding:8px 11px;font-size:.75rem;cursor:pointer}
+.status{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:12px 0}
+.stat{background:#111317;border:1px solid #24272d;border-radius:12px;padding:10px 12px}.stat-label{font-size:.62rem;color:var(--muted);letter-spacing:.12em;text-transform:uppercase}.stat-value{font-size:1.12rem;font-weight:900;margin-top:2px}
+.chapter{display:flex;align-items:center;gap:9px;margin:12px 0 6px;color:var(--lime);font-size:.7rem;font-weight:900;letter-spacing:.15em;text-transform:uppercase}.chapter:before{content:"";width:22px;height:2px;background:var(--lime)}
+.scene-title{font-size:clamp(1.7rem,6vw,2.65rem);line-height:1.04;letter-spacing:-.045em;margin:8px 0 14px;font-weight:950}
+.art{min-height:138px;border-radius:18px;border:1px solid #2a2d33;background:linear-gradient(135deg,#20262a,#101114 70%);display:flex;align-items:center;justify-content:center;font-size:4.6rem;position:relative;overflow:hidden;margin:8px 0 18px}
+.art:after{content:"";position:absolute;inset:auto -20px -65px;height:110px;background:var(--lime);opacity:.08;transform:rotate(-8deg)}
+.story{font-size:1rem;line-height:1.75;color:#e1e2df;white-space:pre-line}.story strong{color:var(--lime)}
+.dialogue{border-left:3px solid var(--orange);background:#191719;padding:13px 15px;margin:16px 0;border-radius:0 12px 12px 0;color:#f5d5bf;font-size:.93rem;line-height:1.6}
+.choices{display:grid;gap:10px;margin:20px 0 28px}.choice{width:100%;text-align:left;display:flex;gap:12px;align-items:flex-start;padding:15px 14px;border:1px solid #30343a;border-radius:14px;background:#15171b;color:var(--text);cursor:pointer;transition:border-color .15s,transform .15s}.choice:hover{border-color:var(--lime)}.choice:active{transform:scale(.99)}.choice-num{display:grid;place-items:center;flex:0 0 27px;height:27px;border-radius:8px;background:#292d30;color:var(--lime);font-size:.76rem;font-weight:900}.choice-copy{font-size:.9rem;line-height:1.45}.choice-copy small{display:block;color:var(--muted);margin-top:4px;font-size:.75rem}
+footer{margin-top:auto;padding:18px 0 22px;color:#656970;font-size:.68rem;display:flex;justify-content:space-between;border-top:1px solid #22252a;gap:10px}
+#toast{position:fixed;bottom:22px;left:50%;transform:translate(-50%,20px);background:var(--lime);color:#111;font-weight:850;padding:11px 16px;border-radius:12px;opacity:0;pointer-events:none;transition:.25s;max-width:90vw;text-align:center;z-index:20}#toast.show{opacity:1;transform:translate(-50%,0)}
+.ending{border:1px solid #41472b;background:linear-gradient(145deg,#1c2113,#12140f);border-radius:18px;padding:18px;margin:18px 0}.ending h3{color:var(--lime);margin:0 0 8px}
+@media(min-width:650px){#app{padding-left:28px;padding-right:28px}.art{min-height:190px;font-size:5.5rem}.story{font-size:1.05rem}}
 </style>
 </head>
 <body>
-<main class="app">
-<header class="top"><div><div class="brand">TRYB LEGENDY • SEZON 01</div><div class="title">KAPITAN <span>KOKS</span></div></div><div class="pill">🥅 BRAMKARZ PRO</div></header>
-<section class="scorebar" aria-label="Statystyki">
-<div class="stat"><strong id="saves">0</strong><small>GOLE</small></div><div class="stat"><strong id="round">1 / 5</strong><small>RZUT KARNY</small></div><div class="stat"><strong id="fans">0</strong><small>FANI 🔥</small></div>
-</section>
-<section class="stadium" aria-label="Boisko do wykonywania rzutów karnych">
-<div class="sky"><div class="stadiumlabel">STADION IM. WIELKIEGO KOKSA</div><div class="crowd"></div></div>
-<div class="pitch" id="pitch">
-<div class="goal" id="goal"></div>
-<div class="keeper" id="keeper" aria-label="Kapitan Koks — kreskówkowy bramkarz">
-<svg viewBox="0 0 100 130" role="img" aria-label="Kreskówkowy bramkarz w zielonej koszulce" xmlns="http://www.w3.org/2000/svg">
-<defs><linearGradient id="shirt" x1="0" x2="1"><stop stop-color="#a4e83e"/><stop offset="1" stop-color="#4d9b26"/></linearGradient><linearGradient id="skin" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#f5c99d"/><stop offset="1" stop-color="#d99161"/></linearGradient></defs>
-<!-- legs and boots -->
-<path d="M36 91 L34 113 Q34 118 29 120 L20 123 Q17 127 24 128 L43 127 Q47 125 45 120 L49 95Z" fill="#f0c092" stroke="#583b2a" stroke-width="2.5" stroke-linejoin="round"/>
-<path d="M58 92 L65 112 Q67 117 73 119 L82 122 Q87 126 80 128 L61 127 Q57 125 58 120 L49 98Z" fill="#f0c092" stroke="#583b2a" stroke-width="2.5" stroke-linejoin="round"/>
-<path d="M21 121 Q30 118 43 123 L45 128 L19 129 Q14 126 21 121Z" fill="#18251d" stroke="#f4f1d7" stroke-width="2"/>
-<path d="M62 121 Q72 117 83 122 Q89 126 82 129 L61 128Z" fill="#18251d" stroke="#f4f1d7" stroke-width="2"/>
-<!-- arms -->
-<path d="M34 53 Q23 53 19 64 L10 77 Q7 82 13 85 Q18 87 22 80 L39 66Z" fill="url(#skin)" stroke="#583b2a" stroke-width="3" stroke-linejoin="round"/>
-<path d="M65 53 Q77 52 81 64 L91 76 Q95 81 89 85 Q84 87 80 80 L61 66Z" fill="url(#skin)" stroke="#583b2a" stroke-width="3" stroke-linejoin="round"/>
-<!-- goalkeeper gloves -->
-<path d="M5 72 Q1 68 3 63 L8 56 Q12 52 16 57 L20 65 Q22 71 16 78 L11 83 Q5 82 5 72Z" fill="#f4f0dc" stroke="#253a2a" stroke-width="3" stroke-linejoin="round"/>
-<path d="M85 72 Q80 67 83 61 L87 55 Q91 52 95 57 L98 65 Q100 71 94 78 L89 83 Q83 82 85 72Z" fill="#f4f0dc" stroke="#253a2a" stroke-width="3" stroke-linejoin="round"/>
-<path d="M5 67 L16 72 M7 61 L18 66 M85 66 L96 61 M84 72 L95 67" stroke="#c8ff42" stroke-width="3" stroke-linecap="round"/>
-<!-- torso -->
-<path d="M35 47 Q49 42 64 47 L72 58 L66 91 Q50 99 32 91 L28 59Z" fill="url(#shirt)" stroke="#253a2a" stroke-width="3.5" stroke-linejoin="round"/>
-<path d="M42 47 Q50 53 58 47 L57 57 L50 63 L43 57Z" fill="#f4f0dc" stroke="#253a2a" stroke-width="2"/>
-<path d="M32 65 L68 65 M34 72 L66 72" stroke="#eaffc9" stroke-width="2" opacity=".65"/>
-<text x="50" y="84" text-anchor="middle" font-size="15" font-weight="1000" font-family="system-ui,sans-serif" fill="#17391e" stroke="#eaffc9" stroke-width=".5">K</text>
-<!-- neck -->
-<path d="M43 39 L43 49 Q50 57 57 49 L57 39Z" fill="url(#skin)" stroke="#583b2a" stroke-width="2.5"/>
-<!-- ears and face -->
-<ellipse cx="29" cy="29" rx="5" ry="8" fill="url(#skin)" stroke="#583b2a" stroke-width="2"/>
-<ellipse cx="71" cy="29" rx="5" ry="8" fill="url(#skin)" stroke="#583b2a" stroke-width="2"/>
-<path d="M29 19 Q29 4 50 5 Q72 5 71 21 L68 36 Q63 47 50 48 Q37 47 32 36Z" fill="url(#skin)" stroke="#583b2a" stroke-width="3" stroke-linejoin="round"/>
-<!-- hair -->
-<path d="M28 25 Q21 11 34 6 Q43 -1 54 5 Q70 1 74 16 L70 25 L64 17 L55 20 L47 15 L38 22 L33 29Z" fill="#39251c" stroke="#251a14" stroke-width="3" stroke-linejoin="round"/>
-<path d="M35 11 Q43 5 50 10" fill="none" stroke="#77503a" stroke-width="3" stroke-linecap="round"/>
-<!-- brows and eyes -->
-<path d="M36 26 L45 24 M55 24 L64 26" stroke="#39251c" stroke-width="3.5" stroke-linecap="round"/>
-<ellipse cx="41" cy="30" rx="3.7" ry="4.5" fill="#fff"/><ellipse cx="59" cy="30" rx="3.7" ry="4.5" fill="#fff"/>
-<circle cx="42" cy="31" r="2" fill="#253b2d"/><circle cx="58" cy="31" r="2" fill="#253b2d"/>
-<circle cx="42.7" cy="30" r=".8" fill="#fff"/><circle cx="58.7" cy="30" r=".8" fill="#fff"/>
-<path d="M48 31 L46 37 Q50 40 54 37" fill="none" stroke="#b96f49" stroke-width="2.2" stroke-linecap="round"/>
-<path d="M41 40 Q50 46 60 39 Q57 48 50 47 Q44 46 41 40Z" fill="#fff" stroke="#583b2a" stroke-width="2" stroke-linejoin="round"/>
-<path d="M43 42 Q50 44 58 41" fill="none" stroke="#d8755c" stroke-width="1.5"/>
-</svg></div>
-<div class="ball" id="ball">⚽</div>
-<div class="targetMark" id="targetMark" aria-hidden="true"></div>
-<div class="aimhint" id="hint">KLIKNIJ W BRAMCE, ABY WYBRAĆ MIEJSCE STRZAŁU</div>
-<div class="flash" id="flash"><span id="flashText">OBRONA!</span></div>
-</div></section>
-<div class="under"><button class="btn primary" id="shoot">⚽ STRZAŁ!</button><button class="btn secondary" id="reset">↻ OD NOWA</button></div>
-<p class="tip">💡 Kliknij w bramce, aby wybrać cel, a potem stuknij STRZAŁ. Bramkarz rzuci się w stronę piłki!</p>
-<section class="section">
-<div class="sectionhead"><strong>💬 SZATNIA I PODRYW</strong><small>TEKSTY KAPITANA</small></div>
-<div class="dialogue"><div class="avatar" id="chatAvatar">😎</div><div class="bubble" id="chatText"><b>Kapitan Koks:</b> Spokojnie, ten karny jest łatwiejszy niż zagadanie do kogoś na trybunach.</div></div>
-<div class="chatchoices"><button class="btn secondary" id="joke">😏 Rzuć tekstem</button><button class="btn secondary" id="pep">💪 Motywuj ekipę</button></div>
-</section>
-<div class="foot">KAPITAN KOKS • MINI GRA MOBILNA • POWODZENIA, SZEFIE</div>
-</main>
-<div class="notice" id="modal"><div class="modal"><h2 id="modalTitle">Koniec meczu!</h2><p id="modalText"></p><button class="btn primary" id="playAgain">GRAMY JESZCZE RAZ</button></div></div>
+<div id="intro">
+  <div class="kicker">niezależna opowieść interaktywna</div>
+  <h1 class="logo">KOKOS.<span>HISTORIA PRAWDZIWA.</span></h1>
+  <p class="subtitle">Bramkarz. Czwarta klasa liceum. Ford C‑Max z charakterem. Jedna miejscowość i zdecydowanie za dużo pewności siebie.</p>
+  <button class="primary" id="start">ROZPOCZNIJ HISTORIĘ ↗</button>
+  <div class="intro-note">KAŻDA DECYZJA COŚ ZMIENIA</div>
+</div>
+<div id="app">
+ <main class="screen" aria-live="polite">
+  <header><div class="brand">KOKOS<b>®</b> <span style="color:#8d9299;font-weight:500">/ HISTORIA PRAWDZIWA</span></div><button class="small-button" id="restart">↻ Od początku</button></header>
+  <section class="status">
+   <div class="stat"><div class="stat-label">Reputacja</div><div class="stat-value" id="rep">0</div></div>
+   <div class="stat"><div class="stat-label">Forma</div><div class="stat-value" id="form">72</div></div>
+   <div class="stat"><div class="stat-label">C‑Max</div><div class="stat-value" id="car">84%</div></div>
+  </section>
+  <div class="chapter" id="chapter">Rozdział 1</div>
+  <h2 class="scene-title" id="title"></h2>
+  <div class="art" id="art" aria-hidden="true">🥅</div>
+  <div class="story" id="story"></div>
+  <div class="dialogue" id="dialogue"></div>
+  <div class="choices" id="choices"></div>
+  <footer><span>FIKCJA INSPIROWANA KLIMATEM SZKOLNEJ LEGENDY</span><span id="progress">SCENA 1</span></footer>
+ </main>
+</div>
+<div id="toast"></div>
 <script>
-(()=>{
+const scenes = {
+start:{chapter:"Rozdział 1 · Poniedziałek",title:"Król parkingu",art:"🚙",story:"Jest 7:18. Kokos, bramkarz szkolnej drużyny i uczeń czwartej klasy liceum, podjeżdża swoim Fordem C‑Maxem pod szkołę. Auto ma dwa tryby: „odpala” i „zastanawia się”. Kokos wysiada w okularach przeciwsłonecznych, chociaż nie ma słońca.\n\nDziś ma trzy cele: przeżyć matematykę, nie puścić gola na treningu i odzyskać tajemniczą ładowarkę, którą ktoś pożyczył w listopadzie.",dialogue:"KOKOS: „Spokojnie. Mam plan. Nie pamiętam go, ale mam.”",choices:[["A","Zaparkować idealnie między liniami","Precyzja buduje legendy.",{rep:1,car:0}, "parking"],["B","Wjechać z muzyką jak na wejściu do finału","Głośniki charczą, ale intencja się liczy.",{rep:2,form:-2},"music"],["C","Pomóc komuś z ciężkim plecakiem przy wejściu","Niespodziewanie dobry początek dnia.",{rep:2,form:2},"help"]]},
+parking:{chapter:"Rozdział 1 · Poniedziałek",title:"Mistrz parkowania",art:"🅿️",story:"Kokos ustawia C‑Maxa dokładnie na środku miejsca. Wysiada, sprawdza linie i kiwa głową jak inżynier po odbiorze mostu. Woźny pan Mirek obserwuje to z dystansu.",dialogue:"PAN MIREK: „Synu, to jest miejsce dla niepełnosprawnych.” Kokos: „To ja już poprawiam.”",choices:[["A","Przeparkować i przeprosić","Szacunek rośnie, ego lekko pęka.",{rep:2,form:1},"hall"],["B","Udawać, że to był test manewrowania","Test oblany, ale przynajmniej darmowy.",{rep:-1,car:0},"hall"]]},
+music:{chapter:"Rozdział 1 · Poniedziałek",title:"Bas, którego nie było",art:"🔊",story:"Z głośników leci coś, co miało być rapem, ale brzmi jak pralka wirująca z monetą w środku. Trzy osoby patrzą. Jedna kiwa głową z litości.",dialogue:"KOKOS: „To underground.” KOLEGA OLEK: „To chyba under garaż.”",choices:[["A","Przyznać, że radio ma swoje lata","Auto dostaje drugą szansę.",{rep:1,form:1},"hall"],["B","Zwiększyć głośność, żeby ukryć problem","Problem słyszy teraz cała ulica.",{rep:-1,car:-3},"hall"]]},
+help:{chapter:"Rozdział 1 · Poniedziałek",title:"Dobra akcja",art:"🎒",story:"Kokos pomaga pierwszoklasiście nieść pudło z dekoracjami na szkolny kiermasz. Zamiast robić z tego pokaz, po prostu wnosi pudło na górę. Okazuje się, że w środku jest papierowy model stadionu.",dialogue:"PIERWSZOKLASISTA: „Dzięki! Myślałem, że nikt nie pomoże.” KOKOS: „Spoko. Bramkarz broni, ale czasem też nosi.”",choices:[["A","Zostać na chwilę i pomóc klasie","Zyskujesz szacunek bez żadnego popisu.",{rep:3,form:1},"hall"],["B","Wrócić do swojej legendy parkingowej","Dobra akcja i tak zostaje w pamięci.",{rep:1,form:0},"hall"]]},
+hall:{chapter:"Rozdział 2 · Szkolne korytarze",title:"Legenda automatu",art:"🥤",story:"Na przerwie Kokos odkrywa, że automat z napojami połknął jego ostatnie pięć złotych. To osobista zniewaga. Olek twierdzi, że automat ma układ z sekretariatem.",dialogue:"OLEK: „Musisz z nim negocjować.” KOKOS: „Ja negocjuję tylko z napastnikami.”",choices:[["A","Poprosić obsługę szkoły o pomoc","Cywilizacja wygrywa.",{rep:1,form:1},"firstyears"],["B","Spróbować delikatnie nacisnąć przycisk zwrotu","Delikatnie. Naprawdę delikatnie.",{rep:0,form:0},"firstyears"],["C","Zorganizować konferencję prasową przy automacie","Dwie osoby przychodzą. Jedna tylko po wodę.",{rep:2,form:-1},"firstyears"]]},
+firstyears:{chapter:"Rozdział 2 · Nowi na pokładzie",title:"Pokaz umiejętności",art:"⚽",story:"Na boisku grupa pierwszoklasistów przygotowuje się do szkolnego turnieju. Kokos postanawia pokazać im kilka bramkarskich sztuczek — nie po to, żeby kogokolwiek podrywać, tylko dlatego, że na widok piłki jego mózg przełącza się w tryb finału Ligi Mistrzów.",dialogue:"KOKOS: „Patrzcie uważnie. To jest technika.” OLEK: „To jest piłka lekarska.”",choices:[["A","Pokazać prosty chwyt i nauczyć ich ustawienia","Prawdziwy kapitan pomaga drużynie.",{rep:3,form:2},"training"],["B","Zrobić efektowny pad na trawę","Wygląda groźnie. Trawa wygrywa pojedynek.",{rep:1,form:-2},"training"],["C","Oddać piłkę i pozwolić im poprowadzić trening","Zaskakująco dojrzały ruch.",{rep:2,form:1},"training"]]},
+training:{chapter:"Rozdział 3 · Trening",title:"Piłka nie kłamie",art:"🧤",story:"Trener stawia Kokosa w bramce. Pierwszy strzał leci w środek. Drugi w okienko. Trzeci… to podanie do kolegi, który zapomniał, po której stronie gra. Kokos musi zdecydować, jak potraktować tę kompromitację.",dialogue:"TRENER: „Kokos, refleks masz. Teraz jeszcze naucz się przewidywać.” KOKOS: „Przewiduję, że będzie ciężko.”",choices:[["A","Skupić się na ustawieniu i obserwować strzelca","Forma rośnie dzięki pracy.",{rep:1,form:4},"cartrouble"],["B","Rzucić się do każdej piłki, nawet tej poza boiskiem","Spektakularnie, ale kolana protestują.",{rep:2,form:-3},"cartrouble"],["C","Poprosić obrońców, żeby lepiej komunikowali się z bramkarzem","Drużyna to nie jednoosobowy teatr.",{rep:3,form:2},"cartrouble"]]},
+cartrouble:{chapter:"Rozdział 4 · Po lekcjach",title:"Kontrolka grozy",art:"🛠️",story:"Po lekcjach Kokos przekręca kluczyk. C‑Max odpowiada pojedynczym „klik”. Na desce rozdzielczej świeci się kontrolka, której Kokos nie widział nigdy, a instrukcja obsługi ma grubość cegły.",dialogue:"OLEK: „Może to znak, żeby iść pieszo.” KOKOS: „Nie mów tak przy samochodzie. On rozumie.”",choices:[["A","Zadzwonić do rodzica i poprosić o pomoc","Rozsądek jest szybszy niż laweta.",{rep:1,car:5},"mystery"],["B","Zajrzeć do instrukcji i sprawdzić, co oznacza kontrolka","Nauka. W czwartej klasie. Sensacja.",{rep:2,car:3},"mystery"],["C","Spróbować odpalić jeszcze raz, bez szarpania i kombinowania","C‑Max w końcu mruczy.",{rep:0,car:-4},"mystery"]]},
+mystery:{chapter:"Rozdział 5 · Tajemnica bagażnika",title:"Co jest w środku?",art:"🧳",story:"Kiedy Kokos otwiera bagażnik, znajduje trzy rzeczy: starą rękawicę bramkarską, paragon z kebaba sprzed siedmiu miesięcy i kopertę z napisem „OTWORZYĆ PO WYGRANIU”. Kokos nigdy nie widział tej koperty. Olek twierdzi, że to początek kryminału.",dialogue:"KOKOS: „Może to testament?” OLEK: „Masz osiemnaście lat i trzy złote w schowku.”",choices:[["A","Otworzyć kopertę od razu","Ciekawość wygrywa.",{rep:1,form:0},"envelope"],["B","Zostawić ją do końca meczu","Dramaturgia przede wszystkim.",{rep:2,form:1},"match"]]},
+envelope:{chapter:"Rozdział 5 · Tajemnica bagażnika",title:"Wiadomość od samego siebie",art:"✉️",story:"W kopercie znajduje się kartka napisana własnym pismem Kokosa: „Jeśli to czytasz, to znaczy, że znów zapomniałeś, gdzie schowałeś zapasowe rękawice. Są w torbie sportowej.” Na odwrocie jest dopisek: „I kup płyn do spryskiwaczy, geniuszu.”",dialogue:"OLEK: „To najbardziej przyziemna tajemnica w historii.” KOKOS: „Ale rozwiązana.”",choices:[["A","Kupić płyn i ogarnąć torbę","Małe rzeczy też budują legendę.",{rep:2,car:2},"match"],["B","Schować kartkę do portfela na przyszłość","Kokos właśnie stworzył własny system pamięci.",{rep:1,form:1},"match"]]},
+match:{chapter:"Rozdział 6 · Wielki mecz",title:"Jeden strzał",art:"🏟️",story:"Finał szkolnego turnieju. Wynik 1:1. Została minuta. Kokos poprawia rękawice i słyszy z trybun swoje imię, wymieszane z okrzykiem „C‑MAX!”. Nikt nie wie dlaczego. Napastnik przeciwników ustawia piłkę.",dialogue:"TRENER: „Nie musisz być bohaterem. Masz po prostu zrobić swoje.”",choices:[["A","Skupić się na biodrach strzelca i nie zgadywać za wcześnie","Technika zamiast teatru.",{rep:2,form:3},"save"],["B","Zrobić mały krok do przodu i skrócić kąt","Odważnie, ale z głową.",{rep:2,form:2},"save"],["C","Krzyknąć „C‑MAX NIE PĘKA!”","Trybuny odpowiadają. Strzelec też się śmieje.",{rep:3,form:0},"save"]]},
+save:{chapter:"Rozdział 6 · Wielki mecz",title:"Decydująca obrona",art:"🧤",story:"Strzał! Przez ułamek sekundy wszystko zwalnia. Kokos rusza w stronę piłki. Niezależnie od wyniku, to moment, na który trenował cały sezon.",dialogue:"KOKOS (w myślach): „Piłka. Ręce. Spokój. I nie myśl o kontrolce silnika.”",choices:[["A","Rzucić się zdecydowanie w wybrany róg","Jeśli forma jest wysoka, masz przewagę.",{rep:3,form:1},"ending"],["B","Zostać chwilę dłużej na nogach i reagować","Czytanie gry bywa lepsze niż zgadywanie.",{rep:2,form:2},"ending"]]},
+ending:{chapter:"Epilog · Legenda osiedla",title:"I co dalej, Kokosie?",art:"🌇",story:"Mecz się kończy. Drużyna biegnie do Kokosa. Olek robi zdjęcie, na którym wszyscy mają zamknięte oczy. C‑Max odpala za pierwszym razem — co uznano za drugi cud tego dnia. Kokos patrzy na boisko i pierwszy raz nie musi nikomu niczego udowadniać.",dialogue:"KOKOS: „Dobra. Jutro trening. A potem ogarniam tę kontrolkę.”",choices:[["A","Zakończyć dzień jak człowiek i wrócić do domu","Najlepsze legendy zaczynają się od rozsądku.",{rep:2,form:2},"endgood"],["B","Zaproponować drużynie dodatkowy trening","Kapitan to nie tylko opaska.",{rep:3,form:1},"endcaptain"],["C","Zrobić z C‑Maxa oficjalną maskotkę zespołu","Nie pytajcie o zgodę działu marketingu.",{rep:4,form:0},"endcar"]]},
+endgood:{chapter:"Zakończenie",title:"Spokojny bohater",art:"🌙",ending:"Dobra robota. Kokos odkrywa, że bycie legendą nie oznacza robienia hałasu. Oznacza być na czas, pomagać ekipie i pamiętać o płynie do spryskiwaczy.",story:"Wraca do domu. Rękawice schną. Telefon jest naładowany. Jutro też jest dzień.",dialogue:"RANGA: CZŁOWIEK, NA KTÓRYM MOŻNA POLEGAĆ.",choices:[["↻","Zagraj jeszcze raz","Inna decyzja, inna historia.",{},"restart"]]},
+endcaptain:{chapter:"Zakończenie",title:"Kapitan z prawdziwego zdarzenia",art:"🏆",ending:"Drużyna zostaje chwilę dłużej. Kokos nie wygłasza przemowy — po prostu rozstawia pachołki i zaczyna ćwiczenie. Reszta dołącza.",story:"Za kilka miesięcy nikt nie pamięta kontrolki silnika. Wszyscy pamiętają finał i to, że Kokos nigdy nie zostawiał swoich samych.",dialogue:"RANGA: LIDER, NIE GWIAZDA.",choices:[["↻","Zagraj jeszcze raz","Sprawdź inne ścieżki.",{},"restart"]]},
+endcar:{chapter:"Zakończenie",title:"C‑Max: dwunasty zawodnik",art:"🚙",ending:"Na następnym meczu C‑Max stoi przy boisku z papierowym numerem 12 w oknie. To niezgodne z regulaminem maskotek, ale nikt nie ma serca tego zgłaszać.",story:"Kokos obiecuje, że tym razem naprawdę sprawdzi kontrolkę. Olek robi kolejne zdjęcie z zamkniętymi oczami.",dialogue:"RANGA: IKONA MOTORYZACJI LOKALNEJ.",choices:[["↻","Zagraj jeszcze raz","Może tym razem automat odda pięć złotych.",{},"restart"]]}
+};
+let state={scene:"start",rep:0,form:72,car:84,steps:0,seen:[]};
 const $=id=>document.getElementById(id);
-let goals=0,round=1,fans=0,busy=false,finished=false,shotTimer=null,aimX=50,aimY=70,hasTarget=false;
-const keeper=$('keeper'),ball=$('ball'),pitch=$('pitch'),targetMark=$('targetMark');
-const jokes=[
-['😎','<b>Kapitan Koks:</b> Czy wierzysz w gola od pierwszego strzału, czy mam spróbować jeszcze raz?'],
-['⚽','<b>Kapitan Koks:</b> Wskaż róg bramki, nabierz mocy i strzelaj! Bramkarz nie obroni wszystkiego.'],
-['🔥','<b>Kapitan Koks:</b> Moc i kierunek — dwa sekrety wielkiego napastnika!'],
-['😅','<b>Kapitan Koks:</b> Tylko nie strzelaj w parking. Tam już stoją moje korki.'],
-['🏆','<b>Kapitan Koks:</b> Spokojna głowa, dobry timing i siatka aż zatrzepocze!']
-];
-const pepTalks=[
-['🗣️','<b>Kapitan Koks:</b> Głowy do góry, drużyno! Dzisiaj pakujemy piłkę do siatki!'],
-['💪','<b>Kapitan Koks:</b> Celuj precyzyjnie! Bramkarz musi naprawdę doskoczyć do piłki, żeby ją obronić.'],
-['🏆','<b>Kapitan Koks:</b> Na trzy: GOL! Na dwa: GOL! Na jeden… dobra, strzelaj!']
-];
-function say(item){$('chatAvatar').textContent=item[0];$('chatText').innerHTML=item[1]}
-function update(){ $('saves').textContent=goals;$('round').textContent=finished?'KONIEC':round+' / 5';$('fans').textContent=fans}
-function resetPos(){keeper.className='keeper';keeper.style.left='50%';ball.className='ball';ball.style.left='50%';ball.style.top='284px';aimX=50;aimY=70;hasTarget=false;targetMark.style.display='none';$('hint').textContent='KLIKNIJ W BRAMCE, ABY WYBRAĆ MIEJSCE STRZAŁU';$('shoot').disabled=false}
-function clampGoalHeight(){return Math.max(90,Math.min(150,window.innerWidth*.30))}
- function flash(text){$('flashText').textContent=text;$('flash').classList.add('show');setTimeout(()=>$('flash').classList.remove('show'),850)}
-function finish(){finished=true;update();$('modalTitle').textContent=goals>=4?'🔥 KRÓL KARNYCH!':'🏁 KONIEC SERII';$('modalText').textContent='Gole: '+goals+' z 5. '+(goals>=4?'Kibice skandują: KOKS! KOKS! Jesteś legendą stadionu.':goals>=2?'Niezły mecz, kapitanie! Jeszcze trochę treningu i będzie perfekcja.':'Każda legenda zaczyna od treningu. Rewanż?');$('modal').classList.add('open')}
-function startShot(){
-if(busy||finished)return;
-if(!hasTarget){flash('WYBIERZ CEL! 🎯');$('hint').textContent='NAJPIERW KLIKNIJ W BRAMCE, POTEM STUKNIJ STRZAŁ';return}
-busy=true;$('shoot').disabled=true;$('shoot').textContent='⏳ STRZAŁ W TOKU';$('hint').textContent='STRZAŁ W RUCHU! BRAMKARZ REAGUJE…';
-const goalRect=$('goal').getBoundingClientRect();
-const pitchRect=pitch.getBoundingClientRect();
-const shotZone=aimX>=35&&aimX<=65?'center':(aimX<50?'left':'right')+'-'+(aimY<(goalRect.top-pitchRect.top+goalRect.height/2)?'top':'bottom');
-const zones=['left-top','left-bottom','right-top','right-bottom','center'];
-const keeperZone=zones[Math.floor(Math.random()*zones.length)];
-const keeperClass=keeperZone==='center'?'dive-center':'dive-'+keeperZone;
-const x=aimX;
-const y=aimY;
-ball.className='ball flying';ball.style.left=x+'%';ball.style.top=y+'px';
-targetMark.style.display='none';
-keeper.className='keeper '+keeperClass;
-
-shotTimer=setTimeout(()=>{
-if(shotZone===keeperZone && aimY>=18 && aimY<=clampGoalHeight()){
- const caught=Math.random()<.58;
-if(caught){
-keeper.classList.add('catch');ball.className='ball saved';ball.style.left=(keeperZone.startsWith('left')?'25%':keeperZone.startsWith('right')?'75%':'50%');ball.style.top=Math.max(aimY,65)+'px';flash('ZŁAPANA! 🧤');say(['🧤','<b>Kapitan Koks:</b> Pewny chwyt! Bramkarz przyciągnął piłkę do rękawic!'])
-}else{
-keeper.classList.add('punch');ball.className='ball deflected';ball.style.left=(keeperZone.startsWith('left')?'34%':keeperZone.startsWith('right')?'66%':'58%');ball.style.top=Math.max(aimY-45,18)+'px';flash('WYBICIE! ✋');say(['🧤','<b>Kapitan Koks:</b> Świetna parada! Bramkarz wybija piłkę pięściami!'])
-}}else{goals++;fans+=Math.floor(Math.random()*5)+3;flash('GOOOOL! ⚽🔥');say(['🥳','<b>Kapitan Koks:</b> SIATKA ZATRZEPOTAŁA! Tak się robi karne, szefie!'])}
-round++;update();
-if(round>5){setTimeout(finish,850);busy=false;$('shoot').textContent='SERIA ZAKOŃCZONA';return}
-setTimeout(()=>{resetPos();busy=false;$('shoot').textContent='⚽ STRZAŁ!';},850)
-},650)
+function clamp(n,min,max){return Math.max(min,Math.min(max,n))}
+function render(){
+ const s=scenes[state.scene]||scenes.start;
+ $("chapter").textContent=s.chapter;$("title").textContent=s.title;$("art").textContent=s.art;
+ $("story").textContent=s.story;$("dialogue").textContent=s.dialogue;
+ $("rep").textContent=state.rep;$("form").textContent=state.form;$("car").textContent=state.car+"%";
+ $("progress").textContent="SCENA "+Math.max(1,state.steps+1);
+ $("choices").innerHTML="";
+ if(s.ending){const box=document.createElement("div");box.className="ending";const h=document.createElement("h3");h.textContent="TWOJE ZAKOŃCZENIE";const p=document.createElement("p");p.textContent=s.ending;box.append(h,p);$("choices").append(box)}
+ s.choices.forEach((c,i)=>{
+  const b=document.createElement("button");b.className="choice";
+  const num=document.createElement("span");num.className="choice-num";num.textContent=c[0];
+  const copy=document.createElement("span");copy.className="choice-copy";copy.textContent=c[1];
+  if(c[2]&&c[2].rep!==undefined){const small=document.createElement("small");const bits=[];if(c[2].rep)bits.push("reputacja "+(c[2].rep>0?"+":"")+c[2].rep);if(c[2].form)bits.push("forma "+(c[2].form>0?"+":"")+c[2].form);if(c[2].car)bits.push("C‑Max "+(c[2].car>0?"+":"")+c[2].car);small.textContent=bits.join(" · ");copy.append(small)}
+  b.append(num,copy);b.addEventListener("click",()=>choose(c));$("choices").append(b);
+ });
 }
-$('shoot').addEventListener('click',()=>startShot());
- pitch.addEventListener('pointerdown',e=>{
-if(busy||finished)return;
-const rect=pitch.getBoundingClientRect(),g=$('goal').getBoundingClientRect();
-const px=e.clientX,py=e.clientY;
-if(px<g.left||px>g.right||py<g.top||py>g.bottom)return;
-e.preventDefault();
-aimX=Math.max(6,Math.min(94,(px-rect.left)/rect.width*100));
-aimY=Math.max(18,Math.min(145,py-rect.top));
-hasTarget=true;targetMark.style.left=aimX+'%';targetMark.style.top=aimY+'px';targetMark.style.display='block';
-$('hint').textContent='CEL USTAWIONY! STUKNIJ STRZAŁ';
-});
-
-
-
-$('reset').addEventListener('click',()=>{clearTimeout(shotTimer);goals=0;round=1;fans=0;busy=false;finished=false;$('modal').classList.remove('open');$('shoot').textContent='⚽ STRZAŁ!';$('shoot').disabled=false;resetPos();update();say(['😎','<b>Kapitan Koks:</b> Nowa seria! Wybierz cel i stuknij STRZAŁ!'])});
-$('playAgain').addEventListener('click',()=>{$('modal').classList.remove('open');$('reset').click()});
-$('joke').addEventListener('click',()=>say(jokes[Math.floor(Math.random()*jokes.length)]));
-$('pep').addEventListener('click',()=>say(pepTalks[Math.floor(Math.random()*pepTalks.length)]));
-
-
-update();
-})();
+function choose(c){
+ if(c[4]==="restart"){reset();return}
+ const delta=c[2]||{};state.rep+=delta.rep||0;state.form=clamp(state.form+(delta.form||0),0,100);state.car=clamp(state.car+(delta.car||0),0,100);
+ state.steps++;state.seen.push(state.scene);state.scene=c[4];render();window.scrollTo({top:0,behavior:"smooth"});
+}
+function reset(){state={scene:"start",rep:0,form:72,car:84,steps:0,seen:[]};$("intro").style.display="none";render();window.scrollTo(0,0)}
+$("start").addEventListener("click",reset);$("restart").addEventListener("click",()=>{$("intro").style.display="flex";state={scene:"start",rep:0,form:72,car:84,steps:0,seen:[]};render()});
+render();
 </script>
 </body>
 </html>
