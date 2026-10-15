@@ -35,26 +35,26 @@ h1{font-size:clamp(2.6rem,10vw,5.5rem);line-height:.86;letter-spacing:-.075em;ma
 <main>
 <header><div class="brand">KOKOS<span>®</span> / NOWA GRA</div><div class="pill">DEMO 01 · CHAOS</div></header>
 <h1>KRECHA <span>Z KOKSEM</span></h1>
-<p class="sub">Kokos, stół i podejrzanie biały proszek. Miała być legenda osiedla, a zapowiada się katastrofa z kategorii „kto to teraz posprząta?”.</p>
+<p class="sub">Kokos, stół i „kris”. Nocny klimat, zły pomysł i scena, która zaraz wymknie się spod kontroli.</p>
 <section class="stage" aria-label="Animowana scena Kokosa przy stole">
 <div class="glow"></div><div class="wall-line"></div><div class="floor"></div>
-<div class="stage-label" id="scene-label">SCENA 01 / KUCHENNY DRAMAT</div>
+<div class="stage-label" id="scene-label">SCENA 01 / KRIS</div>
 <div class="character" id="kokos" aria-label="Postać Kokosa"><div class="hair"></div><div class="head"></div><div class="eye one"></div><div class="eye two"></div><div class="nose"></div><div class="mouth"></div><div class="body"></div><div class="arm left"></div><div class="arm right"></div></div>
 <div class="table"></div><div class="powder" id="powder"></div><div class="cloud" id="cloud"></div>
 </section>
 <section class="panel">
 <div class="status"><span>POZIOM CHAOSU</span><strong id="chaos">0%</strong></div>
-<div id="message" role="status">Kokos pochyla się nad stołem. Z bliska okazuje się, że to mąka do naleśników. Kto, do cholery, rozsypuje mąkę jak czarny charakter z filmu?</div>
-<div class="actions"><button class="btn primary" id="lean">POCHYL SIĘ NAD STOŁEM</button><button class="btn" id="clean">OGARNIJ TEN BURDEL</button></div>
+<div id="message" role="status">Na stole leży „kris”. Kokos patrzy na niego chwilę za długo. W pokoju robi się cicho — to wygląda jak początek fatalnej decyzji.</div>
+<div class="actions"><button class="btn primary" id="lean">ODPAL SCENĘ</button><button class="btn" id="clean">ODPUŚĆ I ODEJDŹ</button></div>
 </section>
-<p class="note">To fikcyjna, komediowa scenka z mąką — nie instrukcja używania narkotyków. Animacja kończy się kichnięciem i totalnym bałaganem.</p>
+<p class="note">Fikcyjna scena o narkotyku. Animacja pokazuje napięcie i konsekwencje, bez realistycznego instruktażu zażywania.</p>
 <footer><span>KRECHA Z KOKSEM</span><span id="ending">RUN #001</span></footer>
 </main>
 <script>
 const $=id=>document.getElementById(id);let chaos=0,done=false;
 function setChaos(n){chaos=Math.max(0,Math.min(100,n));$("chaos").textContent=chaos+"%"}
-function poof(){const c=$("cloud");c.classList.remove("pop");void c.offsetWidth;c.classList.add("pop");document.querySelectorAll(".spark").forEach(e=>e.remove());["💨","✨","💥"].forEach((symbol,i)=>{const s=document.createElement("span");s.className="spark";s.textContent=symbol;s.style.left=(43+i*7)+"%";s.style.bottom=(48+i*6)+"%";s.style.setProperty("--x",(-35+i*38)+"px");s.style.setProperty("--y",(-65-i*12)+"px");$("stage-label").after(s);requestAnimationFrame(()=>s.classList.add("pop"))})}
-$("lean").addEventListener("click",()=>{if(done){$("message").textContent="Kokos już kichnął. Zostało tylko sprzątanie i tłumaczenie, czemu kuchnia wygląda jak śnieżyca.";return}done=true;$("kokos").classList.add("lean");$("scene-label").textContent="SCENA 02 / BŁĄD KRYTYCZNY";$("message").textContent="Kokos zbliża nos do kupki mąki — i A-PSIK! Chmura białego pyłu leci wszędzie. Kokos wygląda jak duch po nieudanym praniu, a kuchnia zamienia się w zimową krainę.";setChaos(78);setTimeout(()=>{$("kokos").classList.remove("lean");$("kokos").classList.add("sneeze");poof();$("powder").style.width="145px";$("powder").style.opacity=".45"},500);$("ending").textContent="KICHNIĘCIE ODBLOKOWANE";$("lean").textContent="JESZCZE RAZ?";});
-$("clean").addEventListener("click",()=>{if(!done){$("message").textContent="Kokos zgarnia mąkę na blat, ale rękawem rozmazuje ją po całej powierzchni. Sprzątanie: poziom ekspert.";setChaos(22);$("powder").style.width="55px";$("ending").textContent="MAŁY PRZYPAŁ"}else{$("message").textContent="Kokos bierze ścierkę, robi trzy ruchy i przypadkiem rozpyla resztę mąki w powietrze. To nie sprzątanie, to remaster śnieżycy.";setChaos(chaos===78?54:12);$("powder").style.width="30px";$("powder").style.opacity=".25";$("kokos").classList.remove("sneeze");$("ending").textContent="PORZĄDEK? PRAWIE."}});
+function poof(){const c=$("cloud");c.classList.remove("pop");void c.offsetWidth;c.classList.add("pop");document.querySelectorAll(".spark").forEach(e=>e.remove());["⚡","📺","⚠️"].forEach((symbol,i)=>{const s=document.createElement("span");s.className="spark";s.textContent=symbol;s.style.left=(43+i*7)+"%";s.style.bottom=(48+i*6)+"%";s.style.setProperty("--x",(-35+i*38)+"px");s.style.setProperty("--y",(-65-i*12)+"px");$("stage-label").after(s);requestAnimationFrame(()=>s.classList.add("pop"))})}
+$("lean").addEventListener("click",()=>{if(done){$("message").textContent="Scena już się rozegrała. Kokos musi zdecydować, co zrobi dalej.";return}done=true;$("kokos").classList.add("lean");$("scene-label").textContent="SCENA 02 / URWANY SYGNAŁ";$("message").textContent="Kokos pochyla się nad stołem. Obraz nagle zakłócają czerwone artefakty i dźwięk urywa się w pół sekundy — cięcie do chwili później. Kokos odsuwa się od stołu, zdezorientowany; klimat robi się ciężki, a konsekwencje tej decyzji dopiero nadchodzą.";setChaos(78);setTimeout(()=>{$("kokos").classList.remove("lean");$("kokos").classList.add("sneeze");poof();$("powder").style.width="65px";$("powder").style.opacity=".18";$("stage-label").textContent="SYGNAŁ UTRACONY"},500);$("ending").textContent="SCENA ZAKOŃCZONA";$("lean").textContent="JESZCZE RAZ?";});
+$("clean").addEventListener("click",()=>{if(!done){$("message").textContent="Kokos odsuwa się od stołu i postanawia nie ryzykować. Otwiera okno, bierze oddech i wychodzi z pokoju. Chaos spada — przynajmniej na chwilę.";setChaos(22);$("powder").style.width="55px";$("ending").textContent="DOBRA DECYZJA"}else{$("message").textContent="Kokos zostawia stół i wychodzi z pokoju. Telefon zaczyna wibrować — ktoś już pyta, co się odwaliło. To nie jest koniec historii.";setChaos(chaos===78?54:12);$("powder").style.width="30px";$("powder").style.opacity=".25";$("kokos").classList.remove("sneeze");$("ending").textContent="ODWRÓT"}});
 </script>
 </body></html>
