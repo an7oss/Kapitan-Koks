@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#071a12">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Kapitan Koks — Bramkarz Legend</title>
+<style>
+:root{color-scheme:dark;--lime:#c8ff42;--panel:#10251c;--muted:#9bb4a5;--white:#f5ffe9}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:ui-rounded,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#06140e;color:var(--white);overscroll-behavior:none}body{min-height:100svh;background:radial-gradient(ellipse at 50% -15%,#245b39 0,#0b2418 48%,#06140e 100%);padding:env(safe-area-inset-top) 12px env(safe-area-inset-bottom);display:flex;justify-content:center}.app{width:min(100%,520px);padding:12px 0 20px}.top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}.brand{font-size:11px;letter-spacing:2.6px;color:var(--lime);font-weight:900}.title{font-size:clamp(24px,7vw,36px);font-weight:1000;line-height:.98;letter-spacing:-1.5px;margin-top:3px}.title span{color:var(--lime)}.pill{background:#193829;border:1px solid #345b43;padding:8px 11px;border-radius:99px;font-size:12px;font-weight:800;color:var(--lime);white-space:nowrap}.scorebar{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:12px}.stat{background:#0d2118;border:1px solid #21412e;border-radius:15px;padding:10px 8px;text-align:center}.stat strong{display:block;font-size:21px;color:var(--lime);line-height:1.1}.stat small{display:block;font-size:10px;color:var(--muted);letter-spacing:1px;margin-top:4px;font-weight:800}.stadium{position:relative;border:1px solid #2a6540;border-radius:22px;overflow:hidden;background:#123e28;box-shadow:0 16px 45px #0006;touch-action:pan-y}.sky{height:100px;background:linear-gradient(#193b42,#6b9c68 78%,#327043);position:relative;overflow:hidden}.crowd{position:absolute;bottom:0;left:0;right:0;height:42px;background:repeating-linear-gradient(90deg,#d7d1a2 0 4px,#d15d4b 4px 8px,#314c76 8px 12px,#172c24 12px 16px);opacity:.55;clip-path:polygon(0 28%,4% 8%,8% 27%,12% 5%,16% 24%,20% 4%,24% 28%,28% 0,32% 25%,36% 5%,40% 28%,44% 2%,48% 22%,52% 0,56% 24%,60% 4%,64% 26%,68% 0,72% 25%,76% 5%,80% 28%,84% 2%,88% 24%,92% 4%,96% 25%,100% 0,100% 100%,0 100%)}.stadiumlabel{position:absolute;top:15px;left:0;right:0;text-align:center;font-size:10px;font-weight:900;letter-spacing:3px;color:#f2ffe0;text-shadow:0 2px 4px #000}.pitch{height:330px;position:relative;background:repeating-linear-gradient(0deg,#176338 0 43px,#1a6d3c 43px 86px);overflow:hidden}.pitch:before{content:"";position:absolute;left:8%;right:8%;top:14px;height:100px;border:2px solid #e8f5d5aa;border-bottom:0;border-radius:5px 5px 0 0}.pitch:after{content:"";position:absolute;left:27%;right:27%;top:14px;height:52px;border:2px solid #e8f5d566;border-top:0;border-radius:0 0 50% 50%}.goal{position:absolute;z-index:2;left:12%;right:12%;top:21px;height:100px;border:6px solid #f4f5df;border-bottom-width:4px;border-radius:3px 3px 0 0;background:repeating-linear-gradient(90deg,transparent 0 19px,#eaf7e277 20px 22px),repeating-linear-gradient(0deg,transparent 0 18px,#eaf7e277 19px 21px);box-shadow:0 0 0 2px #152d20,0 8px 18px #06140e55}.keeper{position:absolute;z-index:5;left:50%;top:82px;transform:translateX(-50%);font-size:58px;filter:drop-shadow(0 5px 2px #05201077);transition:left .18s ease,top .18s ease;user-select:none}.keeper .jersey{position:absolute;left:50%;top:42px;transform:translateX(-50%);font-size:28px}.ball{position:absolute;z-index:6;left:50%;top:240px;transform:translate(-50%,-50%);font-size:33px;filter:drop-shadow(0 5px 2px #0007);transition:left .65s cubic-bezier(.2,.8,.2,1),top .65s cubic-bezier(.2,.8,.2,1);user-select:none}.ball.flying{transform:translate(-50%,-50%) rotate(500deg) scale(.72)}.aimhint{position:absolute;bottom:18px;left:0;right:0;text-align:center;font-size:12px;font-weight:900;color:#eaffd4;text-shadow:0 2px 4px #0008;z-index:4}.flash{position:absolute;inset:0;z-index:8;display:flex;align-items:center;justify-content:center;pointer-events:none;opacity:0;transition:opacity .15s}.flash.show{opacity:1}.flash span{background:#071a12dd;border:2px solid var(--lime);color:var(--lime);padding:13px 18px;border-radius:16px;font-size:23px;font-weight:1000;transform:rotate(-4deg);box-shadow:0 10px 25px #0006}.under{display:flex;gap:8px;margin-top:10px}.btn{appearance:none;border:0;border-radius:15px;padding:14px 12px;font:900 14px system-ui;cursor:pointer;touch-action:manipulation;min-height:48px}.btn:active{transform:scale(.98)}.primary{background:var(--lime);color:#102014;flex:1;box-shadow:0 5px 0 #77a51f}.secondary{background:#183526;border:1px solid #31563e;color:var(--white);flex:1}.tip{font-size:11px;color:#a5beac;text-align:center;margin:12px 6px 0;line-height:1.5}.section{margin-top:15px;background:linear-gradient(135deg,#10271b,#0b1c14);border:1px solid #21422d;border-radius:19px;padding:14px}.sectionhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.sectionhead strong{font-size:14px}.sectionhead small{color:var(--muted);font-size:10px}.dialogue{display:flex;align-items:center;gap:12px}.avatar{width:49px;height:49px;flex:0 0 49px;border-radius:16px;background:#294735;display:grid;place-items:center;font-size:27px}.bubble{background:#193526;border:1px solid #2d5139;border-radius:4px 15px 15px 15px;padding:10px 12px;font-size:13px;line-height:1.4;flex:1}.bubble b{color:var(--lime)}.chatchoices{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.chatchoices .btn{font-size:12px;padding:10px;min-height:43px}.notice{position:fixed;inset:0;background:#020905c9;z-index:20;display:none;align-items:flex-end;justify-content:center;padding:14px}.notice.open{display:flex}.modal{width:min(100%,480px);background:#10251a;border:1px solid #416647;border-radius:24px;padding:20px;box-shadow:0 20px 70px #0009}.modal h2{margin:0 0 8px;font-size:25px}.modal p{color:#c0d3c4;line-height:1.55;font-size:14px}.modal .btn{width:100%;margin-top:8px}.foot{text-align:center;color:#64816d;font-size:10px;margin:15px 0 0}@media(min-height:850px){.pitch{height:370px}.keeper{top:95px}.ball{top:270px}.goal{height:115px}.sky{height:115px}}@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<main class="app">
+<header class="top"><div><div class="brand">TRYB LEGENDY • SEZON 01</div><div class="title">KAPITAN <span>KOKS</span></div></div><div class="pill">🥅 BRAMKARZ PRO</div></header>
+<section class="scorebar" aria-label="Statystyki">
+<div class="stat"><strong id="saves">0</strong><small>OBRONY</small></div><div class="stat"><strong id="round">1 / 5</strong><small>RZUT KARNY</small></div><div class="stat"><strong id="fans">0</strong><small>FANI 🔥</small></div>
+</section>
+<section class="stadium" aria-label="Boisko do obrony rzutów karnych">
+<div class="sky"><div class="stadiumlabel">STADION IM. WIELKIEGO KOKSA</div><div class="crowd"></div></div>
+<div class="pitch" id="pitch">
+<div class="goal"></div>
+<div class="keeper" id="keeper" aria-label="Kapitan Koks">🧤<span class="jersey">🟩</span></div>
+<div class="ball" id="ball">⚽</div>
+<div class="aimhint" id="hint">DOTKNIJ LEWEJ LUB PRAWEJ STRONY BOISKA</div>
+<div class="flash" id="flash"><span id="flashText">OBRONA!</span></div>
+</div></section>
+<div class="under"><button class="btn primary" id="shoot">▶ ROZPOCZNIJ STRZAŁ</button><button class="btn secondary" id="reset">↻ OD NOWA</button></div>
+<p class="tip">💡 Przed strzałem wybierz stronę boiska. Możesz też przesunąć palcem po murawie, by rzucić się w wybranym kierunku.</p>
+<section class="section">
+<div class="sectionhead"><strong>💬 SZATNIA I PODRYW</strong><small>TEKSTY KAPITANA</small></div>
+<div class="dialogue"><div class="avatar" id="chatAvatar">😎</div><div class="bubble" id="chatText"><b>Kapitan Koks:</b> Spokojnie, ten karny jest łatwiejszy niż zagadanie do kogoś na trybunach.</div></div>
+<div class="chatchoices"><button class="btn secondary" id="joke">😏 Rzuć tekstem</button><button class="btn secondary" id="pep">💪 Motywuj ekipę</button></div>
+</section>
+<div class="foot">KAPITAN KOKS • MINI GRA MOBILNA • POWODZENIA, SZEFIE</div>
+</main>
+<div class="notice" id="modal"><div class="modal"><h2 id="modalTitle">Koniec meczu!</h2><p id="modalText"></p><button class="btn primary" id="playAgain">GRAMY JESZCZE RAZ</button></div></div>
+<script>
+(()=>{
+const $=id=>document.getElementById(id);
+let saves=0,round=1,fans=0,chosen=null,busy=false,finished=false,shotTimer=null;
+const keeper=$('keeper'),ball=$('ball'),pitch=$('pitch');
+const jokes=[
+['😎','<b>Kapitan Koks:</b> Czy wierzysz w miłość od pierwszego gola, czy mam strzelić jeszcze raz?'],
+['⚽','<b>Kapitan Koks:</b> Znam świetny trik: ty się uśmiechasz, a ja zapominam, jak się broni karne.'],
+['🧤','<b>Kapitan Koks:</b> Moje rękawice łapią wszystko… oprócz odwagi, żeby powiedzieć „cześć”.'],
+['🔥','<b>Kapitan Koks:</b> Podobno mam refleks. Zauważyłem twój uśmiech w 0,2 sekundy.'],
+['😅','<b>Kapitan Koks:</b> Jestem bramkarzem, więc obiecuję pilnować… żeby rozmowa nie była nudna.']
+];
+const pepTalks=[
+['🗣️','<b>Kapitan Koks:</b> Głowy do góry, drużyno! Gramy sercem i bronimy razem!'],
+['💪','<b>Kapitan Koks:</b> Każdy strzał to szansa na legendę. Rękawice gotowe!'],
+['🏆','<b>Kapitan Koks:</b> Na trzy: KOKS! Na dwa: KOKS! Na jeden… no dobra, już bronię!']
+];
+function say(item){$('chatAvatar').textContent=item[0];$('chatText').innerHTML=item[1]}
+function update(){ $('saves').textContent=saves;$('round').textContent=finished?'KONIEC':round+' / 5';$('fans').textContent=fans}
+function resetPos(){keeper.style.left='50%';keeper.style.top='82px';ball.classList.remove('flying');ball.style.left='50%';ball.style.top='240px';$('hint').textContent='DOTKNIJ LEWEJ LUB PRAWEJ STRONY BOISKA'}
+function flash(text){$('flashText').textContent=text;$('flash').classList.add('show');setTimeout(()=>$('flash').classList.remove('show'),850)}
+function finish(){finished=true;update();$('modalTitle').textContent=saves>=4?'🧤 MUR NIE DO PRZEJŚCIA!':'🏁 KONIEC SERII';$('modalText').textContent='Obrony: '+saves+' z 5. '+(saves>=4?'Kibice skandują: KOKS! KOKS! Jesteś legendą stadionu.':saves>=2?'Niezły mecz, kapitanie! Trening czyni mistrza.':'Każda legenda zaczyna od treningu. Rewanż?');$('modal').classList.add('open');}
+function startShot(){
+if(busy||finished)return;
+if(!chosen){$('hint').textContent='NAJPIERW WYBIERZ LEWĄ LUB PRAWĄ STRONĘ!';flash('WYBIERZ STRONĘ!');return}
+busy=true;const target=chosen;chosen=null;$('shoot').textContent='⏳ STRZAŁ W TOKU';$('hint').textContent='BRONISZ!';const direction=['left','center','right'][Math.floor(Math.random()*3)];const goalX=direction==='left'?28:direction==='right'?72:50;
+ball.classList.add('flying');ball.style.left=goalX+'%';ball.style.top='72px';
+keeper.style.left=target==='left'?'27%':target==='right'?'73%':'50%';keeper.style.top=(target==='center'?'70px':'58px');
+shotTimer=setTimeout(()=>{
+const saved=target===direction||(target==='center'&&direction==='center');
+if(saved){saves++;fans+=Math.floor(Math.random()*5)+3;flash(['PARADA! 🧤','ALE OBRONA! 🔥','KAPITAN! 🧱'][Math.floor(Math.random()*3)]);say(['🧤','<b>Kapitan Koks:</b> Spokojnie, takie piłki łapię nawet przed śniadaniem!'])}
+else{flash('GOL RYWALA 😅');say(['😤','<b>Kapitan Koks:</b> To była rozgrzewka. Następnego nie przepuszczę!'])}
+round++;update();
+if(round>5){setTimeout(finish,900)}else{setTimeout(()=>{resetPos();busy=false;$('shoot').textContent='▶ NASTĘPNY KARNY';$('hint').textContent='WYBIERZ STRONĘ I OBRÓŃ KARNEGO'},450);return}
+busy=false;$('shoot').textContent='▶ SERIA ZAKOŃCZONA';
+},750)
+}
+function choose(side){if(busy||finished)return;chosen=side;$('hint').textContent='WYBRANO: '+(side==='left'?'LEWA STRONA':side==='right'?'PRAWA STRONA':'ŚRODEK')+' — TERAZ ROZPOCZNIJ STRZAŁ';keeper.style.left=side==='left'?'27%':side==='right'?'73%':'50%';}
+pitch.addEventListener('pointerdown',e=>{if(busy||finished)return;const rect=pitch.getBoundingClientRect();const x=(e.clientX-rect.left)/rect.width;choose(x<.38?'left':x>.62?'right':'center')});
+$('shoot').addEventListener('click',startShot);
+$('reset').addEventListener('click',()=>{clearTimeout(shotTimer);saves=0;round=1;fans=0;chosen=null;busy=false;finished=false;$('modal').classList.remove('open');$('shoot').textContent='▶ ROZPOCZNIJ STRZAŁ';resetPos();update();say(['😎','<b>Kapitan Koks:</b> Rewanż! Tym razem nie przejdzie nawet mucha.'])});
+$('joke').addEventListener('click',()=>say(jokes[Math.floor(Math.random()*jokes.length)]));
+$('pep').addEventListener('click',()=>say(pepTalks[Math.floor(Math.random()*pepTalks.length)]));
+$('playAgain').addEventListener('click',()=>$('reset').click());
+update();
+})();
+</script>
+</body>
+</html>
