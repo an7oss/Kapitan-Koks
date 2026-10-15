@@ -10,7 +10,7 @@
 *{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button{font:inherit}
 #app{min-height:100svh;background:radial-gradient(ellipse at 50% 0%,#1b2024 0,#08090b 62%);padding:env(safe-area-inset-top) 16px env(safe-area-inset-bottom);display:flex;justify-content:center}
 .screen{width:100%;max-width:760px;min-height:100svh;display:flex;flex-direction:column}
-#intro{align-items:center;justify-content:center;text-align:center;background:#050505;position:fixed;inset:0;z-index:10;padding:24px}
+#intro{align-items:center;justify-content:center;text-align:center;background:#000;position:fixed;inset:0;z-index:10;padding:24px}
 .kicker{letter-spacing:.28em;text-transform:uppercase;color:var(--lime);font-size:.68rem;font-weight:800}
 .logo{font-size:clamp(2.1rem,9vw,5rem);line-height:.94;font-weight:1000;letter-spacing:-.065em;margin:18px 0 12px;text-wrap:balance}
 .logo span{display:block;color:var(--lime)}
@@ -41,11 +41,8 @@ footer{margin-top:auto;padding:18px 0 22px;color:#656970;font-size:.68rem;displa
 </head>
 <body>
 <div id="intro">
-  <div class="kicker">niezależna opowieść interaktywna</div>
-  <h1 class="logo">KOKOS.<span>HISTORIA PRAWDZIWA.</span></h1>
-  <p class="subtitle">Bramkarz. Czwarta klasa liceum. Ford C‑Max z charakterem. Jedna miejscowość i zdecydowanie za dużo pewności siebie.</p>
-  <button class="primary" id="start">ROZPOCZNIJ HISTORIĘ ↗</button>
-  <div class="intro-note">KAŻDA DECYZJA COŚ ZMIENIA</div>
+  <h1 class="logo">KOKOS I JEGO ŻYCIE</h1>
+  <button class="primary" id="start">ROZPOCZNIJ</button>
 </div>
 <div id="app">
  <main class="screen" aria-live="polite">
